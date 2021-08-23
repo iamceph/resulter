@@ -1,6 +1,3 @@
 rootProject.name = 'resulter'
 
 include 'common'
-include 'reactor-extra'
-include 'grpc-extra'
-

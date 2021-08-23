@@ -1,69 +1,110 @@
 package cz.iamceph.resulter.common;
 
-import cz.iamceph.resulter.common.model.Resultable;
+import cz.iamceph.resulter.common.api.Resultable;
 import org.jetbrains.annotations.Nullable;
 import reactor.core.publisher.Mono;
 
-public abstract class SimpleResult implements Resultable {
-    
+/**
+ *
+ */
+public abstract class SimpleResult {
+
+    /**
+     * We don't want people to initialize this by themselves, right? :)
+     */
     protected SimpleResult() {
     }
 
-    public static SimpleResult ok() {
+    /**
+     *
+     * @return
+     */
+    public static Resultable ok() {
         return Resulters.RESULTER().ok();
     }
 
-    public static SimpleResult ok(String message) {
+    /**
+     *
+     * @param message
+     * @return
+     */
+    public static Resultable ok(String message) {
         return Resulters.RESULTER().ok(message);
     }
 
-    public static SimpleResult fail(String message) {
+    /**
+     *
+     * @param message
+     * @return
+     */
+    public static Resultable fail(String message) {
         return Resulters.RESULTER().fail(message);
     }
 
-    public static SimpleResult fail(String message, Throwable throwable) {
+    /**
+     *
+     * @param message
+     * @param throwable
+     * @return
+     */
+    public static Resultable fail(String message, Throwable throwable) {
         return Resulters.RESULTER().fail(message, throwable);
     }
 
-    public static SimpleResult fail(Throwable throwable) {
+    /**
+     *
+     * @param throwable
+     * @return
+     */
+    public static Resultable fail(Throwable throwable) {
         return Resulters.RESULTER().fail(throwable);
     }
 
-    public static SimpleResult warn() {
-        return Resulters.RESULTER().warn();
+    /**
+     *
+     * @param message
+     * @return
+     */
+    public static Resultable warning(String message) {
+        return Resulters.RESULTER().warning(message);
     }
 
-    public static SimpleResult warn(String message) {
-        return Resulters.RESULTER().warn(message);
+    /**
+     *
+     * @param message
+     * @param throwable
+     * @return
+     */
+    public static Resultable warning(String message, Throwable throwable) {
+        return Resulters.RESULTER().warning(message, throwable);
     }
 
-    public static SimpleResult convert(Object input) {
+    /**
+     *
+     * @param throwable
+     * @return
+     */
+    public static Resultable warning(Throwable throwable) {
+        return Resulters.RESULTER().warning(throwable);
+    }
+
+    /**
+     *
+     * @param input
+     * @return
+     */
+    public static Resultable convert(Object input) {
         return Resulters.RESULTER().convert(input);
     }
 
-    public static Mono<SimpleResult> monoResult(Mono<?> input) {
+    /**
+     *
+     * @param input
+     * @return
+     */
+    public static Mono<Resultable> monoResult(Mono<?> input) {
         return Mono.defer(() -> input)
                 .map(next -> SimpleResult.ok())
                 .onErrorResume(t -> Mono.just(SimpleResult.fail(t)));
-    }
-
-    /**
-     * Creates a {@link DataResult} from this.
-     *
-     * @param <T> type
-     * @return fail DataResult. If this result is OK, fails anyways, because no data are present.
-     */
-    public <T> DataResult<T> asData() {
-        return asData(null);
-    }
-
-    /**
-     * Creates a {@link DataResult} from this.
-     *
-     * @param <T> type
-     * @return OK DataResult. If given data are null, fails.
-     */
-    public <T> DataResult<T> asData(@Nullable T data) {
-        return Resulters.RESULTER().asData(this, data);
     }
 }

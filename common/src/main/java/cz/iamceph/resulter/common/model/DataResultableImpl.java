@@ -1,7 +1,10 @@
-package cz.iamceph.resulter.common;
+package cz.iamceph.resulter.common.model;
 
-import cz.iamceph.resulter.common.model.DataResultable;
-import cz.iamceph.resulter.common.model.ResultStatus;
+import org.jetbrains.annotations.Nullable;
+
+import cz.iamceph.resulter.common.DataResult;
+import cz.iamceph.resulter.common.api.DataResultable;
+import cz.iamceph.resulter.common.api.ResultStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +13,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Accessors(fluent = true)
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-class DataResultImpl<T> extends DataResult<T> {
+class DataResultableImpl<T> implements DataResultable<T> {
     final ResultStatus status;
     final String message;
     final Throwable error;
@@ -34,5 +37,15 @@ class DataResultImpl<T> extends DataResult<T> {
     @Override
     public boolean isWarning() {
         return status == ResultStatus.WARNING;
+    }
+
+    @Override
+    public <K> DataResultable<K> asData() {
+        return null;
+    }
+
+    @Override
+    public <K> DataResultable<K> asData(@Nullable K data) {
+        return null;
     }
 }

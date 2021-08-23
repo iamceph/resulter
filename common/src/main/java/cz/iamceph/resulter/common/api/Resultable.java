@@ -1,9 +1,11 @@
-package cz.iamceph.resulter.common.model;
+package cz.iamceph.resulter.common.api;
+
+import java.io.Serializable;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.Serializable;
+import cz.iamceph.resulter.common.DataResult;
 
 /**
  * Resultable for holding operation results.
@@ -26,15 +28,33 @@ public interface Resultable extends Serializable, Cloneable {
 
     /**
      * Checks if this Result is OK.
+     *
      * @return true if the result is OK.
      */
     boolean isOk();
 
     /**
      * Checks if this Result is FAIL.
+     *
      * @return true if the result is FAIL.
      */
     boolean isFail();
 
     boolean isWarning();
+
+    /**
+     * Creates a {@link DataResultable} from this.
+     *
+     * @param <T> type
+     * @return Failed DataResultable. If this Resultable is OK, fails anyways, because no data are present.
+     */
+    <T> DataResultable<T> asData();
+
+    /**
+     * Creates a {@link DataResultable} from this.
+     *
+     * @param <T> type
+     * @return OK DataResult. If given data are null, fails.
+     */
+    <T> DataResultable<T> asData(@Nullable T data);
 }

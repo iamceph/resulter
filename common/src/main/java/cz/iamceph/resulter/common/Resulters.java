@@ -1,22 +1,32 @@
 package cz.iamceph.resulter.common;
 
+import cz.iamceph.resulter.common.model.DataResulterProviderImpl;
+import cz.iamceph.resulter.common.model.ResulterProviderImpl;
+import cz.iamceph.resulter.common.provider.DataResulterProvider;
+import cz.iamceph.resulter.common.provider.ResulterProvider;
+
 public class Resulters {
-    private static AbstractResulter RESULTER_INSTANCE;
-    private static AbstractDataResulter DATA_RESULTER_INSTANCE;
+    private static ResulterProvider RESULTER_PROVIDER;
+    private static DataResulterProvider DATA_RESULTER_INSTANCE;
 
-    static AbstractResulter RESULTER() {
-        return RESULTER_INSTANCE;
+    static {
+        RESULTER_PROVIDER = ResulterProviderImpl.get();
+        DATA_RESULTER_INSTANCE = DataResulterProviderImpl.get();
     }
 
-    public static void RESULTER(AbstractResulter resulter) {
-        Resulters.RESULTER_INSTANCE = resulter;
+    public static ResulterProvider RESULTER() {
+        return RESULTER_PROVIDER;
     }
 
-    static AbstractResulter DATA_RESULTER() {
-        return RESULTER_INSTANCE;
+    public static void RESULTER(ResulterProvider resulterProvider) {
+        Resulters.RESULTER_PROVIDER = resulterProvider;
     }
 
-    public static void DATA_RESULTER(AbstractDataResulter dataResulter) {
-        Resulters.DATA_RESULTER_INSTANCE = dataResulter;
+    public static DataResulterProvider DATA_RESULTER() {
+        return DATA_RESULTER_INSTANCE;
+    }
+
+    public static void DATA_RESULTER(DataResulterProvider dataResulterProvider) {
+        Resulters.DATA_RESULTER_INSTANCE = dataResulterProvider;
     }
 }
