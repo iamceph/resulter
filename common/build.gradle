@@ -1,0 +1,3 @@
+dependencies {
+    compileOnly group: 'io.projectreactor', name: 'reactor-core', version: '3.4.8'
+}

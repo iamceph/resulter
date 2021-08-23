@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'idea'
+    id 'io.freefair.lombok' version '6.1.0'
+}
+
+allprojects {
+    group 'cz.iamceph.resulter'
+    version '1.0.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'idea'
+    apply plugin: 'io.freefair.lombok'
+
+    dependencies {
+        compileOnly group: 'org.jetbrains', name: 'annotations', version: '22.0.0'
+    }
+}
