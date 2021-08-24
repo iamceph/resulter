@@ -1,9 +1,9 @@
 package cz.iamceph.resulter.common.api;
 
-import java.io.Serializable;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.io.Serializable;
 
 /**
  * The Resultable API.
@@ -45,11 +45,26 @@ public interface Resultable extends Serializable, Cloneable {
      */
     boolean isWarning();
 
+    /**
+     * @return Convertor instance. Depends on the implementation.
+     */
     Convertor convertor();
 
     interface Convertor {
+        /**
+         * Converts this {@link Resultable} into a JSON string.
+         *
+         * @return JSON string.
+         */
         String json();
 
+        /**
+         * Converts this {@link Resultable} into other Object.
+         *
+         * @param target Class of the target
+         * @param <K>    type of the target
+         * @return converted {@link Resultable}
+         */
         <K> K convert(Class<K> target);
     }
 }

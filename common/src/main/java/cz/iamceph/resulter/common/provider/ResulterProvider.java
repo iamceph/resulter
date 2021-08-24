@@ -1,29 +1,54 @@
 package cz.iamceph.resulter.common.provider;
 
+import cz.iamceph.resulter.common.SimpleResult;
 import cz.iamceph.resulter.common.api.Resultable;
 
 /**
- * Interface that provides {@link Resultable}.
+ * Service that provides {@link Resultable}.
  */
 public interface ResulterProvider {
-
+    /**
+     * @see SimpleResult#ok() 
+     */
     Resultable ok();
 
+    /**
+     * @see SimpleResult#ok(String) 
+     */
     Resultable ok(String message);
 
+    /**
+     * @see SimpleResult#fail(String) 
+     */
     Resultable fail(String message);
 
+    /**
+     * @see SimpleResult#fail(String, Throwable) 
+     */
     Resultable fail(String message, Throwable throwable);
 
+    /**
+     * @see SimpleResult#fail(Throwable) 
+     */
     Resultable fail(Throwable throwable);
 
+    /**
+     * @see SimpleResult#warning(String) 
+     */
     Resultable warning(String message);
 
+    /**
+     * @see SimpleResult#warning(String, Throwable) 
+     */
     Resultable warning(String message, Throwable throwable);
 
+    /**
+     * @see SimpleResult#warning(Throwable)
+     */
     Resultable warning(Throwable throwable);
 
+    /**
+     * @see SimpleResult
+     */
     Resultable convert(Object input);
-
-    Resultable convert(String json);
 }

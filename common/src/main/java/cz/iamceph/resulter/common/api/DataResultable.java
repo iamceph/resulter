@@ -1,12 +1,13 @@
 package cz.iamceph.resulter.common.api;
 
+import cz.iamceph.resulter.common.DataResult;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-
-import cz.iamceph.resulter.common.DataResult;
 
 /**
  * Resultable that can have data.
@@ -22,7 +23,10 @@ public interface DataResultable<T> extends Resultable {
      */
     boolean hasData();
 
-    T data();
+    /**
+     * @return data for this resultable. Null if not present :)
+     */
+    @Nullable T data();
 
     default DataResultable<T> filter(Predicate<T> predicate, String errorMessage) {
         if (isFail()) {
@@ -93,9 +97,6 @@ public interface DataResultable<T> extends Resultable {
     }
 
     default Optional<T> asOptional() {
-        if (!hasData()) {
-            return Optional.empty();
-        }
-        return Optional.of(data());
+        return Optional.ofNullable(data());
     }
 }

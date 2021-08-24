@@ -5,11 +5,11 @@ import cz.iamceph.resulter.common.api.Resultable;
 /**
  * @author Frantisek Novosad (fnovosad@monetplus.cz)
  */
-public interface ConvertorExtension<T extends Resultable> {
+public interface ConvertorExtension {
 
-    T convert(Object input);
+    Resultable convert(Object input);
 
-    <K> K convert(T resultable, Class<T> target);
+    <T> T convert(Resultable resultable, Class<T> target);
 
-    String json(T resultable);
+    String json(Resultable resultable);
 }

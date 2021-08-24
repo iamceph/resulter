@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
+/**
+ * Default implementation of the {@link Resultable}
+ */
 @Getter
 @Accessors(fluent = true)
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
@@ -16,22 +19,33 @@ class ResultableImpl implements Resultable {
     final String message;
     final Throwable error;
 
+    /**
+     * @see Resultable#isOk()
+     */
     @Override
     public boolean isOk() {
         return status == ResultStatus.OK;
     }
 
+    /**
+     * @see Resultable#isFail()
+     */
     @Override
     public boolean isFail() {
         return status == ResultStatus.FAIL;
     }
 
+    /**
+     * @see Resultable#isWarning()
+     */
     @Override
     public boolean isWarning() {
         return status == ResultStatus.WARNING;
     }
 
-    @SuppressWarnings("unchecked")
+    /**
+     * @see Resultable#convertor()
+     */
     @Override
     public Convertor convertor() {
         return new Convertor() {

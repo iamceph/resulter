@@ -1,6 +1,6 @@
 package cz.iamceph.resulter.common.model;
 
-import cz.iamceph.resulter.common.SimpleResult;
+import cz.iamceph.resulter.common.Resulters;
 import cz.iamceph.resulter.common.api.ResultStatus;
 import cz.iamceph.resulter.common.api.Resultable;
 import cz.iamceph.resulter.common.provider.ResulterProvider;
@@ -56,6 +56,6 @@ public class ResulterProviderImpl implements ResulterProvider {
 
     @Override
     public Resultable convert(Object input) {
-        return SimpleResult.fail("Not implemented yet.");
+        return Resulters.CONVERTOR().convert(input);
     }
 }

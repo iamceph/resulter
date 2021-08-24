@@ -3,7 +3,7 @@ package cz.iamceph.resulter.common.api;
 import lombok.Getter;
 
 /**
- * Current status of the Result.
+ * Status of given {@link Resultable}.
  */
 public enum ResultStatus {
     /**
@@ -20,6 +20,9 @@ public enum ResultStatus {
      */
     WARNING(2);
 
+    /**
+     * Number value of this {@link Resultable}. Useful for converting to gRPC for example :)
+     */
     @Getter
     private final Integer numberValue;
 
