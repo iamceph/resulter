@@ -1,10 +1,6 @@
 package cz.iamceph.resulter.common.model;
 
-import org.jetbrains.annotations.Nullable;
-
 import cz.iamceph.resulter.common.Resulters;
-import cz.iamceph.resulter.common.SimpleResult;
-import cz.iamceph.resulter.common.api.DataResultable;
 import cz.iamceph.resulter.common.api.ResultStatus;
 import cz.iamceph.resulter.common.api.Resultable;
 import lombok.AccessLevel;
@@ -35,28 +31,19 @@ class ResultableImpl implements Resultable {
         return status == ResultStatus.WARNING;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public <T> DataResultable<T> asData() {
-        return asData(null);
-    }
-
-    @Override
-    public <T> DataResultable<T> asData(@Nullable T data) {
-        if (data == null && status() != ResultStatus.OK) {
-            if (status() == ResultStatus.FAIL) {
-                return Resulters.DATA_RESULTER().fail(message(), error());
+    public Convertor convertor() {
+        return new Convertor() {
+            @Override
+            public String json() {
+                return Resulters.CONVERTOR().json(ResultableImpl.this);
             }
 
-            return Resulters.DATA_RESULTER().warning(message(), error());
-        }
-
-        switch (status()) {
-            case OK:
-                return Resulters.DATA_RESULTER().ok(data, message());
-            case WARNING:
-                return Resulters.DATA_RESULTER().warning(data, message(), error());
-            default:
-                return Resulters.DATA_RESULTER().fail(data, message(), error());
-        }
+            @Override
+            public <K> K convert(Class<K> target) {
+                return (K) Resulters.CONVERTOR().convert(ResultableImpl.this, target);
+            }
+        };
     }
 }

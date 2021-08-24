@@ -7,14 +7,19 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import cz.iamceph.resulter.common.DataResult;
-import cz.iamceph.resulter.common.SimpleResult;
 
 /**
  * Resultable that can have data.
- * @param <T>
+ *
+ * @param <T> Type of the Data
  */
 public interface DataResultable<T> extends Resultable {
 
+    /**
+     * Checks if this Resultable has any data.
+     *
+     * @return true if this Resultable has any data.
+     */
     boolean hasData();
 
     T data();
@@ -25,13 +30,13 @@ public interface DataResultable<T> extends Resultable {
         }
 
         try {
-            if (predicate.test(data())) {
-                return DataResult.ok(data());
+            if (!predicate.test(data())) {
+                return DataResult.fail(errorMessage);
             }
-            return DataResult.fail(errorMessage);
         } catch (Throwable t) {
             return DataResult.fail("filter() failed because of Throwable.", t);
         }
+        return this;
     }
 
     default DataResultable<T> filter(Predicate<T> predicate) {
@@ -56,7 +61,7 @@ public interface DataResultable<T> extends Resultable {
         return this;
     }
 
-    default DataResultable<T> ifOkOrElse(Consumer<T> data, Consumer<Resultable> fallback) {
+    default DataResultable<T> ifOk(Consumer<T> data, Consumer<Resultable> fallback) {
         if (isOk() && hasData()) {
             data.accept(data());
             return this;
@@ -72,7 +77,7 @@ public interface DataResultable<T> extends Resultable {
         }
 
         try {
-            return DataResult.ok(mapper.apply(data()));
+            return DataResult.ok(mapper.apply(data()), message());
         } catch (Throwable t) {
             return DataResult.fail("map() failed because of Throwable.", t);
         }
@@ -80,24 +85,17 @@ public interface DataResultable<T> extends Resultable {
 
     @SuppressWarnings("unchecked")
     default <K> DataResultable<K> transform() {
-        return (DataResultable<K>) this;
+        try {
+            return (DataResultable<K>) this;
+        } catch (Throwable t) {
+            return DataResult.fail("transform() failed because of Throwable.", t);
+        }
     }
 
     default Optional<T> asOptional() {
-        if (isFail() || isWarning()) {
+        if (!hasData()) {
             return Optional.empty();
         }
         return Optional.of(data());
-    }
-
-    default Resultable asSimple() {
-        switch (this.status()) {
-            case FAIL:
-                return SimpleResult.fail(message());
-            case OK:
-                return SimpleResult.ok(message());
-            default:
-                return SimpleResult.warning(message());
-        }
     }
 }

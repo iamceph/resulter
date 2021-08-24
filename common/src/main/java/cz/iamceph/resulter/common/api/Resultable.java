@@ -5,10 +5,8 @@ import java.io.Serializable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import cz.iamceph.resulter.common.DataResult;
-
 /**
- * Resultable for holding operation results.
+ * The Resultable API.
  */
 public interface Resultable extends Serializable, Cloneable {
     /**
@@ -27,34 +25,31 @@ public interface Resultable extends Serializable, Cloneable {
     @Nullable Throwable error();
 
     /**
-     * Checks if this Result is OK.
+     * Check if the Resultable is {@link ResultStatus#OK}
      *
-     * @return true if the result is OK.
+     * @return true if this Resultable is in state {@link ResultStatus#OK}
      */
     boolean isOk();
 
     /**
-     * Checks if this Result is FAIL.
+     * Check if the Resultable is {@link ResultStatus#FAIL}
      *
-     * @return true if the result is FAIL.
+     * @return true if this Resultable is in state {@link ResultStatus#FAIL}
      */
     boolean isFail();
 
+    /**
+     * Check if the Resultable is {@link ResultStatus#WARNING}
+     *
+     * @return true if this Resultable is in state {@link ResultStatus#WARNING}
+     */
     boolean isWarning();
 
-    /**
-     * Creates a {@link DataResultable} from this.
-     *
-     * @param <T> type
-     * @return Failed DataResultable. If this Resultable is OK, fails anyways, because no data are present.
-     */
-    <T> DataResultable<T> asData();
+    Convertor convertor();
 
-    /**
-     * Creates a {@link DataResultable} from this.
-     *
-     * @param <T> type
-     * @return OK DataResult. If given data are null, fails.
-     */
-    <T> DataResultable<T> asData(@Nullable T data);
+    interface Convertor {
+        String json();
+
+        <K> K convert(Class<K> target);
+    }
 }

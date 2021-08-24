@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package resulter.proto;
+
+option java_multiple_files = true;
+option java_package = "cz.iamceph.resulter.common.model";
+
+message Result {
+  enum Status {
+    FAIL = 0;
+    OK = 1;
+    WARNING = 2;
+  }
+
+  Status status = 1;
+  string message = 2;
+  ProtoThrowable error = 3;
+}
+
+message ProtoThrowable {
+  string errorMessage = 1;
+  repeated ProtoStackTrace stackTrace = 3;
+
+  message ProtoStackTrace {
+    string classLoaderName = 1;
+    string moduleName = 2;
+    string moduleVersion = 3;
+    string declaringClass = 4;
+    string methodName = 5;
+    string fileName = 6;
+    int32 lineNumber = 7;
+  }
+}

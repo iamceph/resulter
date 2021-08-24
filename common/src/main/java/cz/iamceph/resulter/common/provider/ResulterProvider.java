@@ -2,7 +2,11 @@ package cz.iamceph.resulter.common.provider;
 
 import cz.iamceph.resulter.common.api.Resultable;
 
+/**
+ * Interface that provides {@link Resultable}.
+ */
 public interface ResulterProvider {
+
     Resultable ok();
 
     Resultable ok(String message);
@@ -20,4 +24,6 @@ public interface ResulterProvider {
     Resultable warning(Throwable throwable);
 
     Resultable convert(Object input);
+
+    Resultable convert(String json);
 }

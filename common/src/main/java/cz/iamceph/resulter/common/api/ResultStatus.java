@@ -7,18 +7,18 @@ import lombok.Getter;
  */
 public enum ResultStatus {
     /**
+     * Result failed. The reason is either in the {@link Resultable#message()} or {@link Resultable#error()}.
+     */
+    FAIL(0),
+    /**
      * Result is OK.
-     * That means that any operation with the Result itself is safe.
+     * OK means that given {@link Resultable} ended OK and nothing is wrong. Duh?
      */
-    OK(0),
+    OK(1),
     /**
-     * Result failed.
+     * Warning means that given operation did not finish as expected, but it is not critical a critical error.
      */
-    FAIL(1),
-    /**
-     * This represents a state when result did not fail but also did not end OK.
-     */
-    WARNING(-1);
+    WARNING(2);
 
     @Getter
     private final Integer numberValue;

@@ -9,8 +9,8 @@ public abstract class DataResult {
         return Resulters.DATA_RESULTER().ok(data);
     }
 
-    public static <T> DataResultable<T> ok(String message, T data) {
-        return Resulters.DATA_RESULTER().ok(data);
+    public static <T> DataResultable<T> ok(T data, String message) {
+        return Resulters.DATA_RESULTER().ok(data, message);
     }
 
     public static <T> DataResultable<T> fail(String message) {
