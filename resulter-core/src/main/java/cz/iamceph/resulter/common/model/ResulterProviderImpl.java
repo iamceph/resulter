@@ -36,7 +36,7 @@ public class ResulterProviderImpl implements ResulterProvider {
 
     @Override
     public Resultable fail(Throwable throwable) {
-        return new ResultableImpl(ResultStatus.FAIL, null, throwable);
+        return new ResultableImpl(ResultStatus.FAIL, throwable.getMessage(), throwable);
     }
 
     @Override

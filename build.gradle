@@ -21,6 +21,14 @@ subprojects {
     apply plugin: 'io.freefair.lombok'
 
     dependencies {
-        compileOnly group: 'org.jetbrains', name: 'annotations', version: '22.0.0'
+        compileOnly group: 'org.jetbrains', name: 'annotations', version: JETBRAINS_ANNOTATIONS_VERSION
+    }
+
+    dependencies {
+        testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: JUNIT_VERSION
+    }
+
+    test {
+        useJUnitPlatform()
     }
 }

@@ -1,13 +1,15 @@
 package cz.iamceph.resulter.common.api;
 
-import cz.iamceph.resulter.common.DataResult;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import org.jetbrains.annotations.Nullable;
+
+import cz.iamceph.resulter.common.DataResult;
+import cz.iamceph.resulter.common.Resulters;
 
 /**
  * Resultable that can have data.
@@ -81,18 +83,9 @@ public interface DataResultable<T> extends Resultable {
         }
 
         try {
-            return DataResult.ok(mapper.apply(data()), message());
+            return Resulters.DATA_RESULTER().ok(mapper.apply(data()), message());
         } catch (Throwable t) {
             return DataResult.fail("map() failed because of Throwable.", t);
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    default <K> DataResultable<K> transform() {
-        try {
-            return (DataResultable<K>) this;
-        } catch (Throwable t) {
-            return DataResult.fail("transform() failed because of Throwable.", t);
         }
     }
 

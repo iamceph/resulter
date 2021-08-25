@@ -1,12 +1,13 @@
 package cz.iamceph.resulter.common;
 
-import cz.iamceph.resulter.common.api.DataResultable;
-import cz.iamceph.resulter.common.api.ResultStatus;
+import java.util.function.Supplier;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import reactor.core.publisher.Mono;
 
-import java.util.function.Supplier;
+import cz.iamceph.resulter.common.api.DataResultable;
+import cz.iamceph.resulter.common.api.ResultStatus;
+import reactor.core.publisher.Mono;
 
 /**
  *

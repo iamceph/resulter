@@ -3,14 +3,14 @@ package cz.iamceph.resulter.common.model;
 import cz.iamceph.resulter.common.Resulters;
 import cz.iamceph.resulter.common.api.ResultStatus;
 import cz.iamceph.resulter.common.api.Resultable;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 /**
  * Default implementation of the {@link Resultable}
  */
+@EqualsAndHashCode
+@ToString
 @Getter
 @Accessors(fluent = true)
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)

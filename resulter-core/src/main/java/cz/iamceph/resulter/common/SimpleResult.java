@@ -1,11 +1,12 @@
 package cz.iamceph.resulter.common;
 
+import java.util.function.Supplier;
+
+import org.jetbrains.annotations.NotNull;
+
 import cz.iamceph.resulter.common.api.ResultStatus;
 import cz.iamceph.resulter.common.api.Resultable;
-import org.jetbrains.annotations.NotNull;
 import reactor.core.publisher.Mono;
-
-import java.util.function.Supplier;
 
 /**
  * SimpleResult is a "simple" access point for creating {@link Resultable}.

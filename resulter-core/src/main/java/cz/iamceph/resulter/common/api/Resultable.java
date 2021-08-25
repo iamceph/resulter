@@ -1,9 +1,12 @@
 package cz.iamceph.resulter.common.api;
 
+import java.io.Serializable;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.Serializable;
+import cz.iamceph.resulter.common.DataResult;
+import cz.iamceph.resulter.common.Resulters;
 
 /**
  * The Resultable API.
@@ -66,5 +69,48 @@ public interface Resultable extends Serializable, Cloneable {
          * @return converted {@link Resultable}
          */
         <K> K convert(Class<K> target);
+    }
+
+    /**
+     * Transforms {@link Resultable} into {@link DataResultable}.
+     *
+     * @param data data, can be null,
+     * @param <T> type of the data,
+     * @return Transformed DataResultable.
+     */
+    default <T> DataResultable<T> transform(@Nullable T data) {
+        if (data == null && isOk()) {
+            return DataResult.fail("No data provided.");
+        }
+
+        switch (status()) {
+            case OK:
+                return Resulters.DATA_RESULTER().ok(data, message());
+            case WARNING:
+                return Resulters.DATA_RESULTER().warning(data, message(), error());
+            default:
+                return Resulters.DATA_RESULTER().fail(data, message(), error());
+
+        }
+    }
+
+    /**
+     * Transforms {@link Resultable} into {@link DataResultable}.
+     * Error handling is provided.
+     *
+     * @param <T> type
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    default  <T> DataResultable<T> transform() {
+        if (this instanceof DataResultable) {
+            try {
+                return (DataResultable<T>) this;
+            } catch (Throwable t) {
+                return DataResult.fail("transform() failed because of Throwable.", t);
+            }
+        }
+
+        return transform(null);
     }
 }

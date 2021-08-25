@@ -2,7 +2,9 @@ package cz.iamceph.resulter.common.model;
 
 import cz.iamceph.resulter.common.api.DataResultable;
 import cz.iamceph.resulter.common.api.ResultStatus;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
@@ -11,6 +13,8 @@ import lombok.experimental.Accessors;
  * @param <T> type of the data
  * @see DataResultable
  */
+@EqualsAndHashCode(callSuper = false)
+@ToString
 @Getter
 @Accessors(fluent = true)
 class DataResultableImpl<T> extends ResultableImpl implements DataResultable<T> {
