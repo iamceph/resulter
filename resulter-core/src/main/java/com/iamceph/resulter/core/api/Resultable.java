@@ -1,12 +1,12 @@
-package cz.iamceph.resulter.core.api;
+package com.iamceph.resulter.core.api;
 
 import java.io.Serializable;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import cz.iamceph.resulter.core.DataResult;
-import cz.iamceph.resulter.core.Resulters;
+import com.iamceph.resulter.core.DataResult;
+import com.iamceph.resulter.core.Resulters;
 
 /**
  * The Resultable API.

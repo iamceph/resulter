@@ -1,9 +1,9 @@
-package cz.iamceph.resulter.core.model;
+package com.iamceph.resulter.core.model;
 
-import cz.iamceph.resulter.core.Resulters;
-import cz.iamceph.resulter.core.api.ResultStatus;
-import cz.iamceph.resulter.core.api.Resultable;
-import cz.iamceph.resulter.core.provider.ResulterProvider;
+import com.iamceph.resulter.core.Resulters;
+import com.iamceph.resulter.core.api.ResultStatus;
+import com.iamceph.resulter.core.api.Resultable;
+import com.iamceph.resulter.core.provider.ResulterProvider;
 
 public class ResulterProviderImpl implements ResulterProvider {
 

@@ -1,14 +1,14 @@
-package cz.iamceph.resulter.core.provider;
+package com.iamceph.resulter.core.provider;
 
-import cz.iamceph.resulter.core.SimpleResult;
-import cz.iamceph.resulter.core.api.Resultable;
+import com.iamceph.resulter.core.SimpleResult;
+import com.iamceph.resulter.core.api.Resultable;
 
 /**
  * Service that provides {@link Resultable}.
  */
 public interface ResulterProvider {
     /**
-     * @see SimpleResult#ok() 
+     * @see SimpleResult#ok()
      */
     Resultable ok();
 

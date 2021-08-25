@@ -1,4 +1,6 @@
-package cz.iamceph.resulter.core;
+package com.iamceph.resulter.core;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Objects;
 
@@ -16,8 +18,8 @@ public class SimpleResultTest {
         Assertions.assertFalse(result.isFail());
         Assertions.assertFalse(result.isWarning());
 
-        Assertions.assertNull(result.error());
-        Assertions.assertNotNull(result.message());
+        assertNull(result.error());
+        assertNotNull(result.message());
 
         Assertions.assertEquals(result.message(), "Ok.");
     }
@@ -31,8 +33,8 @@ public class SimpleResultTest {
         Assertions.assertFalse(result.isFail());
         Assertions.assertFalse(result.isWarning());
 
-        Assertions.assertNull(result.error());
-        Assertions.assertNotNull(result.message());
+        assertNull(result.error());
+        assertNotNull(result.message());
 
         Assertions.assertEquals(result.message(), "test message");
     }
@@ -46,8 +48,8 @@ public class SimpleResultTest {
         Assertions.assertFalse(result.isOk());
         Assertions.assertFalse(result.isWarning());
 
-        Assertions.assertNull(result.error());
-        Assertions.assertNotNull(result.message());
+        assertNull(result.error());
+        assertNotNull(result.message());
 
         Assertions.assertEquals(result.message(), "test message");
     }
@@ -61,12 +63,12 @@ public class SimpleResultTest {
         Assertions.assertFalse(result.isOk());
         Assertions.assertFalse(result.isWarning());
 
-        Assertions.assertNotNull(result.error());
-        Assertions.assertNotNull(result.message());
+        assertNotNull(result.error());
+        assertNotNull(result.message());
 
         Assertions.assertEquals(result.message(), "test message");
 
-        Assertions.assertSame(Objects.requireNonNull(result.error()).getClass(), UnsupportedOperationException.class);
+        assertSame(Objects.requireNonNull(result.error()).getClass(), UnsupportedOperationException.class);
     }
 
     @Test
@@ -78,12 +80,12 @@ public class SimpleResultTest {
         Assertions.assertFalse(result.isOk());
         Assertions.assertFalse(result.isWarning());
 
-        Assertions.assertNotNull(result.error());
-        Assertions.assertNotNull(result.message());
+        assertNotNull(result.error());
+        assertNotNull(result.message());
 
         Assertions.assertEquals(result.message(), "This is not supposed to happen. :)");
 
-        Assertions.assertSame(Objects.requireNonNull(result.error()).getClass(), UnsupportedOperationException.class);
+        assertSame(Objects.requireNonNull(result.error()).getClass(), UnsupportedOperationException.class);
     }
 
     @Test
@@ -95,8 +97,8 @@ public class SimpleResultTest {
         Assertions.assertFalse(result.isOk());
         Assertions.assertFalse(result.isFail());
 
-        Assertions.assertNull(result.error());
-        Assertions.assertNotNull(result.message());
+        assertNull(result.error());
+        assertNotNull(result.message());
 
         Assertions.assertEquals(result.message(), "test message");
     }
@@ -110,12 +112,12 @@ public class SimpleResultTest {
         Assertions.assertFalse(result.isOk());
         Assertions.assertFalse(result.isFail());
 
-        Assertions.assertNotNull(result.error());
-        Assertions.assertNotNull(result.message());
+        assertNotNull(result.error());
+        assertNotNull(result.message());
 
         Assertions.assertEquals(result.message(), "test message");
 
-        Assertions.assertSame(Objects.requireNonNull(result.error()).getClass(), UnsupportedOperationException.class);
+        assertSame(Objects.requireNonNull(result.error()).getClass(), UnsupportedOperationException.class);
     }
 
     @Test
@@ -127,11 +129,11 @@ public class SimpleResultTest {
         Assertions.assertFalse(result.isOk());
         Assertions.assertFalse(result.isFail());
 
-        Assertions.assertNotNull(result.error());
-        Assertions.assertNotNull(result.message());
+        assertNotNull(result.error());
+        assertNotNull(result.message());
 
         Assertions.assertEquals(result.message(), "This is not supposed to happen. :)");
 
-        Assertions.assertSame(Objects.requireNonNull(result.error()).getClass(), UnsupportedOperationException.class);
+        assertSame(Objects.requireNonNull(result.error()).getClass(), UnsupportedOperationException.class);
     }
 }

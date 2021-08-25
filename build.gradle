@@ -7,7 +7,7 @@ plugins {
 }
 
 allprojects {
-    group 'cz.iamceph.resulter'
+    group 'com.iamceph.resulter'
     version '1.0.0-SNAPSHOT'
 
     repositories {

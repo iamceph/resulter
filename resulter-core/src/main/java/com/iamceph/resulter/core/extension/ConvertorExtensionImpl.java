@@ -1,11 +1,12 @@
-package cz.iamceph.resulter.core.extension;
+package com.iamceph.resulter.core.extension;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import cz.iamceph.resulter.core.api.Resultable;
-import cz.iamceph.resulter.core.model.ProtoThrowable;
+import com.iamceph.resulter.core.api.Resultable;
+import com.iamceph.resulter.core.model.Result;
+import com.iamceph.resulter.core.model.ProtoThrowable;
 
 /**
  * @author Frantisek Novosad (fnovosad@monetplus.cz)
@@ -22,8 +23,8 @@ public class ConvertorExtensionImpl implements ConvertorExtension {
 
     @Override
     public Resultable convert(Object input) {
-        if (input instanceof cz.iamceph.resulter.core.model.Result) {
-            final var casted = (cz.iamceph.resulter.core.model.Result) input;
+        if (input instanceof Result) {
+            final var casted = (Result) input;
             final var error = new Throwable(casted.getError().getErrorMessage());
             error.setStackTrace(toStackTrace(casted.getError().getStackTraceList()).toArray(new StackTraceElement[0]));
         }
@@ -34,8 +35,8 @@ public class ConvertorExtensionImpl implements ConvertorExtension {
     @SuppressWarnings("unchecked")
     @Override
     public <T> T convert(Resultable resultable, Class<T> target) {
-        if (target.isAssignableFrom(cz.iamceph.resulter.core.model.Result.class)) {
-            final var message = cz.iamceph.resulter.core.model.Result.newBuilder();
+        if (target.isAssignableFrom(Result.class)) {
+            final var message = Result.newBuilder();
             final var error = resultable.error();
 
             if (error != null) {
@@ -49,7 +50,7 @@ public class ConvertorExtensionImpl implements ConvertorExtension {
                 message.setMessage(resultable.message());
             }
 
-            message.setStatus(cz.iamceph.resulter.core.model.Result.Status.forNumber(resultable.status().getNumberValue()));
+            message.setStatus(Result.Status.forNumber(resultable.status().getNumberValue()));
             return (T) message.build();
         }
 

@@ -1,7 +1,8 @@
-package cz.iamceph.resulter.core.model;
+package com.iamceph.resulter.core.model;
 
-import cz.iamceph.resulter.core.api.DataResultable;
-import cz.iamceph.resulter.core.api.ResultStatus;
+import com.iamceph.resulter.core.api.DataResultable;
+import com.iamceph.resulter.core.api.ResultStatus;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
