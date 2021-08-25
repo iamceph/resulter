@@ -1,8 +1,8 @@
-package cz.iamceph.resulter.common.model;
+package cz.iamceph.resulter.core.model;
 
-import cz.iamceph.resulter.common.Resulters;
-import cz.iamceph.resulter.common.api.ResultStatus;
-import cz.iamceph.resulter.common.api.Resultable;
+import cz.iamceph.resulter.core.Resulters;
+import cz.iamceph.resulter.core.api.ResultStatus;
+import cz.iamceph.resulter.core.api.Resultable;
 import lombok.*;
 import lombok.experimental.Accessors;
 

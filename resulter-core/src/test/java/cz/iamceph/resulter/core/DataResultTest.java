@@ -1,11 +1,11 @@
-package cz.iamceph.resulter.common;
+package cz.iamceph.resulter.core;
 
 import java.util.Objects;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import cz.iamceph.resulter.common.api.DataResultable;
+import cz.iamceph.resulter.core.api.DataResultable;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 

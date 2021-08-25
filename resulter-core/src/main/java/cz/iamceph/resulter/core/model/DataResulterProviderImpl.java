@@ -1,8 +1,8 @@
-package cz.iamceph.resulter.common.model;
+package cz.iamceph.resulter.core.model;
 
-import cz.iamceph.resulter.common.api.DataResultable;
-import cz.iamceph.resulter.common.api.ResultStatus;
-import cz.iamceph.resulter.common.provider.DataResulterProvider;
+import cz.iamceph.resulter.core.api.DataResultable;
+import cz.iamceph.resulter.core.api.ResultStatus;
+import cz.iamceph.resulter.core.provider.DataResulterProvider;
 
 public class DataResulterProviderImpl implements DataResulterProvider {
 

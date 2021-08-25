@@ -1,11 +1,11 @@
-package cz.iamceph.resulter.common;
+package cz.iamceph.resulter.core;
 
 import java.util.function.Supplier;
 
 import org.jetbrains.annotations.NotNull;
 
-import cz.iamceph.resulter.common.api.ResultStatus;
-import cz.iamceph.resulter.common.api.Resultable;
+import cz.iamceph.resulter.core.api.ResultStatus;
+import cz.iamceph.resulter.core.api.Resultable;
 import reactor.core.publisher.Mono;
 
 /**

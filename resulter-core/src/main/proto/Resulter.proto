@@ -3,7 +3,7 @@ syntax = "proto3";
 package resulter.proto;
 
 option java_multiple_files = true;
-option java_package = "cz.iamceph.resulter.common.model";
+option java_package = "cz.iamceph.resulter.core.model";
 
 message Result {
   enum Status {

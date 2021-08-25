@@ -3,6 +3,7 @@ plugins {
     id 'java-library'
     id 'idea'
     id 'io.freefair.lombok' version '6.1.0'
+    id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
 }
 
 allprojects {
@@ -30,5 +31,14 @@ subprojects {
 
     test {
         useJUnitPlatform()
+    }
+
+    nexusPublishing {
+        repositories {
+            sonatype {
+                username = NEXUS_USERNAME ?: System.env.'NEXUS_USERNAME'
+                password = NEXUS_PASSWORD ?: System.env.'NEXUS_PASSWORD'
+            }
+        }
     }
 }

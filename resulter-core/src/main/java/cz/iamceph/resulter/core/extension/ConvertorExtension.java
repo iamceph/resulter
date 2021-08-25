@@ -1,6 +1,6 @@
-package cz.iamceph.resulter.common.extension;
+package cz.iamceph.resulter.core.extension;
 
-import cz.iamceph.resulter.common.api.Resultable;
+import cz.iamceph.resulter.core.api.Resultable;
 
 /**
  * @author Frantisek Novosad (fnovosad@monetplus.cz)

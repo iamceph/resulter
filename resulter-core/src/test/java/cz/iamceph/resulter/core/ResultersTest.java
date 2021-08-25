@@ -1,9 +1,9 @@
-package cz.iamceph.resulter.common;
+package cz.iamceph.resulter.core;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import cz.iamceph.resulter.common.model.ResulterProviderImpl;
+import cz.iamceph.resulter.core.model.ResulterProviderImpl;
 
 /**
  * @author Frantisek Novosad (fnovosad@monetplus.cz)

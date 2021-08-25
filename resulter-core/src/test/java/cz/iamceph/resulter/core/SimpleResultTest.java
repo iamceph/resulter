@@ -1,4 +1,4 @@
-package cz.iamceph.resulter.common;
+package cz.iamceph.resulter.core;
 
 import java.util.Objects;
 

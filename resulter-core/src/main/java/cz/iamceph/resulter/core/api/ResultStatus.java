@@ -1,4 +1,4 @@
-package cz.iamceph.resulter.common.api;
+package cz.iamceph.resulter.core.api;
 
 import lombok.Getter;
 

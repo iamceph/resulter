@@ -1,7 +1,7 @@
-package cz.iamceph.resulter.common.provider;
+package cz.iamceph.resulter.core.provider;
 
-import cz.iamceph.resulter.common.DataResult;
-import cz.iamceph.resulter.common.api.DataResultable;
+import cz.iamceph.resulter.core.DataResult;
+import cz.iamceph.resulter.core.api.DataResultable;
 
 /**
  * Service that provides {@link DataResultable}.

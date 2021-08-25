@@ -1,7 +1,7 @@
-package cz.iamceph.resulter.common.provider;
+package cz.iamceph.resulter.core.provider;
 
-import cz.iamceph.resulter.common.SimpleResult;
-import cz.iamceph.resulter.common.api.Resultable;
+import cz.iamceph.resulter.core.SimpleResult;
+import cz.iamceph.resulter.core.api.Resultable;
 
 /**
  * Service that provides {@link Resultable}.

@@ -1,16 +1,16 @@
-package cz.iamceph.resulter.common;
+package cz.iamceph.resulter.core;
 
 import java.util.function.Supplier;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import cz.iamceph.resulter.common.api.DataResultable;
-import cz.iamceph.resulter.common.api.ResultStatus;
+import cz.iamceph.resulter.core.api.DataResultable;
+import cz.iamceph.resulter.core.api.ResultStatus;
 import reactor.core.publisher.Mono;
 
 /**
- *
+ * DataResult is a "simple" access point for creating {@link DataResultable}.
  */
 public abstract class DataResult {
 

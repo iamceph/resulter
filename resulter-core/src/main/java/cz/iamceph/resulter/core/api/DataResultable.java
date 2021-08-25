@@ -1,4 +1,4 @@
-package cz.iamceph.resulter.common.api;
+package cz.iamceph.resulter.core.api;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -8,8 +8,8 @@ import java.util.function.Supplier;
 
 import org.jetbrains.annotations.Nullable;
 
-import cz.iamceph.resulter.common.DataResult;
-import cz.iamceph.resulter.common.Resulters;
+import cz.iamceph.resulter.core.DataResult;
+import cz.iamceph.resulter.core.Resulters;
 
 /**
  * Resultable that can have data.
