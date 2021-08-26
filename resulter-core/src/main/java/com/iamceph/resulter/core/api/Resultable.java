@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.iamceph.resulter.core.DataResult;
-import com.iamceph.resulter.core.Resulters;
+import com.iamceph.resulter.core.model.Resulters;
 
 /**
  * The Resultable API.

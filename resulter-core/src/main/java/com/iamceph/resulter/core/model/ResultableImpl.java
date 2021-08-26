@@ -1,7 +1,6 @@
 package com.iamceph.resulter.core.model;
 
 import com.iamceph.resulter.core.api.ResultStatus;
-import com.iamceph.resulter.core.Resulters;
 import com.iamceph.resulter.core.api.Resultable;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -15,9 +14,9 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = true)
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 class ResultableImpl implements Resultable {
-    final ResultStatus status;
-    final String message;
-    final Throwable error;
+    protected final ResultStatus status;
+    protected final String message;
+    protected final Throwable error;
 
     /**
      * @see Resultable#isOk()
@@ -56,7 +55,7 @@ class ResultableImpl implements Resultable {
 
             @Override
             public <K> K convert(Class<K> target) {
-                return (K) Resulters.CONVERTOR().convert(ResultableImpl.this, target);
+                return Resulters.CONVERTOR().convert(ResultableImpl.this, target);
             }
         };
     }

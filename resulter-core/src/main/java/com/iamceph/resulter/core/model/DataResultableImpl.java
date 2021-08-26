@@ -2,7 +2,6 @@ package com.iamceph.resulter.core.model;
 
 import com.iamceph.resulter.core.api.DataResultable;
 import com.iamceph.resulter.core.api.ResultStatus;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -15,11 +14,11 @@ import lombok.experimental.Accessors;
  * @see DataResultable
  */
 @EqualsAndHashCode(callSuper = false)
-@ToString
 @Getter
+@ToString(callSuper = true)
 @Accessors(fluent = true)
 class DataResultableImpl<T> extends ResultableImpl implements DataResultable<T> {
-    final T data;
+    protected final T data;
 
     DataResultableImpl(ResultStatus status, String message, Throwable error, T data) {
         super(status, message, error);

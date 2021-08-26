@@ -1,12 +1,10 @@
-package com.iamceph.resulter.core;
+package com.iamceph.resulter.core.model;
 
 import com.iamceph.resulter.core.api.DataResultable;
 import com.iamceph.resulter.core.api.Resultable;
 import com.iamceph.resulter.core.provider.DataResulterProvider;
 import com.iamceph.resulter.core.extension.ConvertorExtension;
 import com.iamceph.resulter.core.extension.ConvertorExtensionImpl;
-import com.iamceph.resulter.core.model.DataResulterProviderImpl;
-import com.iamceph.resulter.core.model.ResulterProviderImpl;
 import com.iamceph.resulter.core.provider.ResulterProvider;
 import lombok.experimental.UtilityClass;
 

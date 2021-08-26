@@ -1,16 +1,15 @@
 package com.iamceph.resulter.core.model;
 
-import com.iamceph.resulter.core.Resulters;
 import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.api.Resultable;
 import com.iamceph.resulter.core.provider.ResulterProvider;
 
-public class ResulterProviderImpl implements ResulterProvider {
+class ResulterProviderImpl implements ResulterProvider {
 
     private ResulterProviderImpl() {
     }
 
-    public static ResulterProvider get() {
+    static ResulterProvider get() {
         return new ResulterProviderImpl();
     }
 

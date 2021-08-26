@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'java-library'
     id 'idea'
+    id 'maven-publish'
     id 'io.freefair.lombok' version '6.1.0'
     id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
 }
@@ -38,6 +39,48 @@ subprojects {
             sonatype {
                 username = NEXUS_USERNAME ?: System.env.'NEXUS_USERNAME'
                 password = NEXUS_PASSWORD ?: System.env.'NEXUS_PASSWORD'
+                nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+                snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+            }
+        }
+    }
+
+    task('sourceJar', type: Jar) {
+        it.classifier 'sources'
+        from project.sourceSets.main.allJava
+    }
+
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                it.artifact(project.tasks.jar)
+                it.artifact(project.tasks.sourceJar)
+
+                it.artifacts.every {
+                    it.classifier = ""
+                }
+
+                it.pom.withXml {
+                    def dependenciesNode = asNode().appendNode("dependencies")
+                    project.configurations.compileOnly.dependencies.each {
+                        if (!(it instanceof SelfResolvingDependency)) {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', it.group)
+                            dependencyNode.appendNode('artifactId', it.name)
+                            dependencyNode.appendNode('version', it.version)
+                            dependencyNode.appendNode('scope', 'provided')
+                        }
+                    }
+                    if (!project.tasks.findByName("shadowJar")) {
+                        project.configurations.api.dependencies.each {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', it.group)
+                            dependencyNode.appendNode('artifactId', it.name)
+                            dependencyNode.appendNode('version', it.version)
+                            dependencyNode.appendNode('scope', 'compile')
+                        }
+                    }
+                }
             }
         }
     }

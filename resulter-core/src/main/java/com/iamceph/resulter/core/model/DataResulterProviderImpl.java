@@ -4,12 +4,12 @@ import com.iamceph.resulter.core.api.DataResultable;
 import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.provider.DataResulterProvider;
 
-public class DataResulterProviderImpl implements DataResulterProvider {
+class DataResulterProviderImpl implements DataResulterProvider {
 
     private DataResulterProviderImpl() {
     }
 
-    public static DataResulterProvider get() {
+    static DataResulterProvider get() {
         return new DataResulterProviderImpl();
     }
 

@@ -1,15 +1,14 @@
 package com.iamceph.resulter.core.api;
 
+import com.iamceph.resulter.core.DataResult;
+import com.iamceph.resulter.core.model.Resulters;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-
-import org.jetbrains.annotations.Nullable;
-
-import com.iamceph.resulter.core.DataResult;
-import com.iamceph.resulter.core.Resulters;
 
 /**
  * Resultable that can have data.

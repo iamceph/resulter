@@ -1,4 +1,6 @@
 # Resulter
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.iamceph.resulter/resulter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.iamceph.resulter/resulter)
+
 
 Tired of throwing exceptions or returning nonsense? Well, Resulter will save you! 
 
@@ -31,11 +33,13 @@ public Resultable isAccessAllowed(Integer userId) {
 }
 
 public DataResultable<User> anotherCheck(Integer userId) {
+    //lets get if the user can enter
     final Resultable result = isAccessAllowed(userId);
     if (result.isFail()) {
         return result;
     }
     
-    return SimpleResult.ok();
+    //this will fail if the user does not exist in the repo, neat, right? :)
+    return DataResult.failIfNull(userRepository.findUser(userId));
 }
 ```

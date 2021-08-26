@@ -2,6 +2,7 @@ package com.iamceph.resulter.core;
 
 import java.util.function.Supplier;
 
+import com.iamceph.resulter.core.model.Resulters;
 import org.jetbrains.annotations.NotNull;
 
 import com.iamceph.resulter.core.api.ResultStatus;
