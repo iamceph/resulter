@@ -29,6 +29,13 @@ public interface DataResultable<T> extends Resultable {
      */
     @Nullable T data();
 
+    /**
+     * Tries to filter the input data and decides if the result should FAIL or return OK.
+     *
+     * @param predicate    data check
+     * @param errorMessage error message in case the predicate fails
+     * @return {@link DataResult#fail(String)} if the predicate fails
+     */
     default DataResultable<T> filter(Predicate<T> predicate, String errorMessage) {
         if (isFail()) {
             return this;
@@ -44,10 +51,21 @@ public interface DataResultable<T> extends Resultable {
         return this;
     }
 
+    /**
+     * @param predicate    data check
+     * @return {@link DataResult#fail(String)} if the predicate fails
+     * @see DataResultable#filter(Predicate, String) filter
+     */
     default DataResultable<T> filter(Predicate<T> predicate) {
         return filter(predicate, "No data found.");
     }
 
+    /**
+     * If the main result is FAIL, supplies another data.
+     *
+     * @param data data to use in case the result is FAIL
+     * @return OK DataResult.
+     */
     default DataResultable<T> orElse(Supplier<T> data) {
         if (isFail() || !hasData()) {
             return DataResult.ok(data.get());
@@ -55,20 +73,38 @@ public interface DataResultable<T> extends Resultable {
         return this;
     }
 
+    /**
+     * @param data data to use in case the result is FAIL
+     * @return OK DataResult.
+     * @see DataResultable#orElse(Supplier)
+     */
     default DataResultable<T> orElse(T data) {
         return orElse(() -> data);
     }
 
-    default DataResultable<T> ifOk(Consumer<T> data) {
+    /**
+     * Provides data into the consumer if the Resultable is OK.
+     *
+     * @param provider provides data.
+     * @return this DataResult
+     */
+    default DataResultable<T> ifOk(Consumer<T> provider) {
         if (isOk() && hasData()) {
-            data.accept(data());
+            provider.accept(data());
         }
         return this;
     }
 
-    default DataResultable<T> ifOk(Consumer<T> data, Consumer<Resultable> fallback) {
+    /**
+     * Provides data into the consumer if the Resultable is OK.
+     *
+     * @param provider provides data.
+     * @param fallback returns this result into the fallback.
+     * @return this DataResult
+     */
+    default DataResultable<T> ifOk(Consumer<T> provider, Consumer<Resultable> fallback) {
         if (isOk() && hasData()) {
-            data.accept(data());
+            provider.accept(data());
             return this;
         }
 
@@ -76,6 +112,14 @@ public interface DataResultable<T> extends Resultable {
         return this;
     }
 
+    /**
+     * If the data is OK, maps them into something else.
+     * Exception handling is done, return {@link DataResult#fail(String, Throwable)} if that happens.
+     *
+     * @param mapper mapping function
+     * @param <K>    new type of the data
+     * @return OK Resultable if the data are OK.
+     */
     default <K> DataResultable<K> map(Function<T, K> mapper) {
         if (isFail()) {
             return transform();
@@ -88,6 +132,11 @@ public interface DataResultable<T> extends Resultable {
         }
     }
 
+    /**
+     * Tries to transform this Resultable into an {@link Optional}.
+     *
+     * @return {@link Optional} of the data.
+     */
     default Optional<T> asOptional() {
         return Optional.ofNullable(data());
     }

@@ -2,24 +2,43 @@ plugins {
     id 'java'
     id 'java-library'
     id 'idea'
+    id 'signing'
     id 'maven-publish'
     id 'io.freefair.lombok' version '6.1.0'
+
     id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
 }
 
 allprojects {
     group 'com.iamceph.resulter'
-    version '1.0.0-SNAPSHOT'
+    version '1.0.1'
 
     repositories {
         mavenCentral()
     }
 }
 
+nexusPublishing {
+    repositories {
+        sonatype {
+            username = MAVEN_CENTRAL_USERNAME
+            password = MAVEN_CENTRAL_PASSWORD
+
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+        }
+    }
+}
+
+signing {
+    sign publishing.publications
+}
+
 subprojects {
     apply plugin: 'java'
     apply plugin: 'java-library'
     apply plugin: 'idea'
+    apply plugin: 'signing'
     apply plugin: 'io.freefair.lombok'
 
     dependencies {
@@ -34,31 +53,20 @@ subprojects {
         useJUnitPlatform()
     }
 
-    nexusPublishing {
-        repositories {
-            sonatype {
-                username = NEXUS_USERNAME ?: System.env.'NEXUS_USERNAME'
-                password = NEXUS_PASSWORD ?: System.env.'NEXUS_PASSWORD'
-                nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-                snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
-            }
-        }
-    }
-
-    task('sourceJar', type: Jar) {
-        it.classifier 'sources'
-        from project.sourceSets.main.allJava
+    java {
+        withSourcesJar()
+        withJavadocJar()
     }
 
     publishing {
         publications {
-            maven(MavenPublication) {
-                it.artifact(project.tasks.jar)
-                it.artifact(project.tasks.sourceJar)
+            release(MavenPublication) {
+                group = project.group
+                version project.version
 
-                it.artifacts.every {
-                    it.classifier = ""
-                }
+                it.artifact(project.tasks.sourcesJar)
+                it.artifact(project.tasks.javadocJar)
+                it.artifact(project.tasks.jar)
 
                 it.pom.withXml {
                     def dependenciesNode = asNode().appendNode("dependencies")
@@ -79,6 +87,31 @@ subprojects {
                             dependencyNode.appendNode('version', it.version)
                             dependencyNode.appendNode('scope', 'compile')
                         }
+                    }
+                }
+
+                // Mostly self-explanatory metadata
+                pom {
+                    name = "Resulter"
+                    description = 'Tired of throwing exceptions or returning nonsense? Well, Resulter will save you!'
+                    url = 'https://github.com/iamceph/resulter'
+                    licenses {
+                        license {
+                            name = 'GPL-3.0 License'
+                            url = 'https://www.gnu.org/licenses/gpl-3.0.html'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'iamceph'
+                            name = 'Frantisek Novosad'
+                            email = 'frantisek@nvsd.dev'
+                        }
+                    }
+                    scm {
+                        connection = 'scm:git:github.com/iamceph/resulter.git'
+                        developerConnection = 'scm:git:ssh://github.com/iamceph/resulter.git'
+                        url = 'https://github.com/iamceph/resulter/tree/main'
                     }
                 }
             }

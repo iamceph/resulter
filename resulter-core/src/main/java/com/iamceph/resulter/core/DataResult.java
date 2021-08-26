@@ -1,15 +1,13 @@
 package com.iamceph.resulter.core;
 
-import java.util.function.Supplier;
-
+import com.iamceph.resulter.core.api.DataResultable;
+import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.model.Resulters;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import com.iamceph.resulter.core.api.DataResultable;
-import com.iamceph.resulter.core.api.ResultStatus;
-
 import reactor.core.publisher.Mono;
+
+import java.util.function.Supplier;
 
 /**
  * DataResult is a "simple" access point for creating {@link DataResultable}.
@@ -186,7 +184,10 @@ public abstract class DataResult {
     }
 
     /**
-     * @see DataResult#mono(Supplier).
+     * @param input input mono
+     * @param <T>   type of the data
+     * @return {@link Mono} with it's data wrapped into a {@link DataResultable}
+     * @see DataResult#mono(Supplier) mono
      */
     public static <T> Mono<DataResultable<T>> mono(@NotNull final Mono<T> input) {
         return mono(() -> input);

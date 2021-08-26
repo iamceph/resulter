@@ -1,12 +1,11 @@
 package com.iamceph.resulter.core.api;
 
-import java.io.Serializable;
-
+import com.iamceph.resulter.core.DataResult;
+import com.iamceph.resulter.core.model.Resulters;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.iamceph.resulter.core.DataResult;
-import com.iamceph.resulter.core.model.Resulters;
+import java.io.Serializable;
 
 /**
  * The Resultable API.
@@ -75,7 +74,7 @@ public interface Resultable extends Serializable, Cloneable {
      * Transforms {@link Resultable} into {@link DataResultable}.
      *
      * @param data data, can be null,
-     * @param <T> type of the data,
+     * @param <T>  type of the data,
      * @return Transformed DataResultable.
      */
     default <T> DataResultable<T> transform(@Nullable T data) {
@@ -99,10 +98,10 @@ public interface Resultable extends Serializable, Cloneable {
      * Error handling is provided.
      *
      * @param <T> type
-     * @return
+     * @return cast Resultable. Love generics.
      */
     @SuppressWarnings("unchecked")
-    default  <T> DataResultable<T> transform() {
+    default <T> DataResultable<T> transform() {
         if (this instanceof DataResultable) {
             try {
                 return (DataResultable<T>) this;

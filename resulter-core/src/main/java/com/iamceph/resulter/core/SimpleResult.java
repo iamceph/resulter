@@ -1,13 +1,12 @@
 package com.iamceph.resulter.core;
 
-import java.util.function.Supplier;
-
-import com.iamceph.resulter.core.model.Resulters;
-import org.jetbrains.annotations.NotNull;
-
 import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.api.Resultable;
+import com.iamceph.resulter.core.model.Resulters;
+import org.jetbrains.annotations.NotNull;
 import reactor.core.publisher.Mono;
+
+import java.util.function.Supplier;
 
 /**
  * SimpleResult is a "simple" access point for creating {@link Resultable}.
@@ -100,7 +99,10 @@ public abstract class SimpleResult {
         return Resulters.RESULTER().warning(throwable);
     }
 
+
     /**
+     * @param input input
+     * @return {@link Mono} with it's data wrapped into a {@link Resultable}
      * @see SimpleResult#mono(Supplier)
      */
     public static Mono<Resultable> mono(@NotNull Mono<?> input) {
