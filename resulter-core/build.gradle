@@ -1,0 +1,44 @@
+plugins {
+    id "com.google.protobuf" version "0.8.17"
+}
+
+apply plugin: "com.google.protobuf"
+
+dependencies {
+    compileOnly group: 'io.projectreactor', name: 'reactor-core', version: REACTOR_VERSION
+
+    //proto
+    compileOnly group: 'com.google.protobuf', name: 'protobuf-java', version: PROTOBUF_VERSION
+
+    //grpc
+    compileOnly group: 'io.grpc', name: 'grpc-api', version: GRPC_VERSION
+    compileOnly group: 'io.grpc', name: 'grpc-protobuf', version: GRPC_VERSION
+    compileOnly group: 'io.grpc', name: 'protoc-gen-grpc-java', version: GRPC_VERSION
+
+    testImplementation group: 'io.projectreactor', name: 'reactor-test', version: REACTOR_VERSION
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${PROTOBUF_VERSION}"
+    }
+
+    plugins {
+        grpc { artifact = "io.grpc:protoc-gen-grpc-java:${GRPC_VERSION}" }
+    }
+
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'build/generated/source/proto/main/grpc'
+            srcDirs 'build/generated/source/proto/main/java'
+        }
+    }
+}
