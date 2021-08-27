@@ -84,11 +84,11 @@ public interface Resultable extends Serializable, Cloneable {
 
         switch (status()) {
             case OK:
-                return Resulters.DATA_RESULTER().ok(data, message());
+                return Resulters.dataResulter().ok(data, message());
             case WARNING:
-                return Resulters.DATA_RESULTER().warning(data, message(), error());
+                return Resulters.dataResulter().warning(data, message(), error());
             default:
-                return Resulters.DATA_RESULTER().fail(data, message(), error());
+                return Resulters.dataResulter().fail(data, message(), error());
 
         }
     }

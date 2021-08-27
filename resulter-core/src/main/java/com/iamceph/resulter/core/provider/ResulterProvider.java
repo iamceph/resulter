@@ -1,6 +1,7 @@
 package com.iamceph.resulter.core.provider;
 
 import com.iamceph.resulter.core.SimpleResult;
+import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.api.Resultable;
 
 /**
@@ -46,6 +47,11 @@ public interface ResulterProvider {
      * @see SimpleResult#warning(Throwable)
      */
     Resultable warning(Throwable throwable);
+
+    /**
+     * @see SimpleResult#from(ResultStatus, String, Throwable)
+     */
+    Resultable from(ResultStatus status, String message, Throwable throwable);
 
     /**
      * @see SimpleResult

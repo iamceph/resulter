@@ -2,18 +2,16 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.iamceph.resulter/resulter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.iamceph.resulter/resulter)
 [![javadoc](https://javadoc.io/badge2/com.iamceph.resulter/resulter/javadoc.svg)](https://javadoc.io/doc/com.iamceph.resulter/resulter)
 
-
 Tired of throwing exceptions or returning nonsense? Well, Resulter will save you! 
 
 ## Resultable
 Resulter provides simple to use Results. Why? Well, there are few benefits.
-- Fewer exceptions and/or returning nonsense messages
-- Clear understanding of what went wrong with **message()** and **error()** methods
-- gRPC implementation
-- Project Reactor support
-
-
-#### Example
+  - Fewer exceptions or returning nonsense messages.
+  - Clear understanding of what went wrong with **message()** and **error()** methods.
+  - gRPC implementation.
+  - Project Reactor support.
+  
+### Example
 ```java
 //this operation ended normally
 Resultable okResult = SimpleResult.ok();

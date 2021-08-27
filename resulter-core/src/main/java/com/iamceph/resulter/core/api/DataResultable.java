@@ -126,7 +126,7 @@ public interface DataResultable<T> extends Resultable {
         }
 
         try {
-            return Resulters.DATA_RESULTER().ok(mapper.apply(data()), message());
+            return Resulters.dataResulter().ok(mapper.apply(data()), message());
         } catch (Throwable t) {
             return DataResult.fail("map() failed because of Throwable.", t);
         }

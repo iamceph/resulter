@@ -1,12 +1,14 @@
 package com.iamceph.resulter.core;
 
+import java.util.function.Supplier;
+
+import org.jetbrains.annotations.NotNull;
+
 import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.api.Resultable;
 import com.iamceph.resulter.core.model.Resulters;
-import org.jetbrains.annotations.NotNull;
-import reactor.core.publisher.Mono;
 
-import java.util.function.Supplier;
+import reactor.core.publisher.Mono;
 
 /**
  * SimpleResult is a "simple" access point for creating {@link Resultable}.
@@ -22,7 +24,7 @@ public abstract class SimpleResult {
      * @return OK Resultable.
      */
     public static Resultable ok() {
-        return Resulters.RESULTER().ok();
+        return Resulters.resulter().ok();
     }
 
     /**
@@ -32,7 +34,7 @@ public abstract class SimpleResult {
      * @return OK Resultable with message.
      */
     public static Resultable ok(@NotNull String message) {
-        return Resulters.RESULTER().ok(message);
+        return Resulters.resulter().ok(message);
     }
 
     /**
@@ -42,7 +44,7 @@ public abstract class SimpleResult {
      * @return FAIL Resultable with message.
      */
     public static Resultable fail(@NotNull String message) {
-        return Resulters.RESULTER().fail(message);
+        return Resulters.resulter().fail(message);
     }
 
     /**
@@ -53,7 +55,7 @@ public abstract class SimpleResult {
      * @return FAIL Resultable with message and throwable.
      */
     public static Resultable fail(@NotNull String message, @NotNull Throwable throwable) {
-        return Resulters.RESULTER().fail(message, throwable);
+        return Resulters.resulter().fail(message, throwable);
     }
 
     /**
@@ -64,7 +66,7 @@ public abstract class SimpleResult {
      * @return FAIL Resultable with throwable.
      */
     public static Resultable fail(@NotNull Throwable throwable) {
-        return Resulters.RESULTER().fail(throwable);
+        return Resulters.resulter().fail(throwable);
     }
 
     /**
@@ -74,7 +76,7 @@ public abstract class SimpleResult {
      * @return WARNING Resultable with message.
      */
     public static Resultable warning(@NotNull String message) {
-        return Resulters.RESULTER().warning(message);
+        return Resulters.resulter().warning(message);
     }
 
     /**
@@ -85,7 +87,7 @@ public abstract class SimpleResult {
      * @return WARNING Resultable with message and throwable.
      */
     public static Resultable warning(@NotNull String message, @NotNull Throwable throwable) {
-        return Resulters.RESULTER().warning(message, throwable);
+        return Resulters.resulter().warning(message, throwable);
     }
 
     /**
@@ -96,7 +98,7 @@ public abstract class SimpleResult {
      * @return WARNING Resultable with throwable.
      */
     public static Resultable warning(@NotNull Throwable throwable) {
-        return Resulters.RESULTER().warning(throwable);
+        return Resulters.resulter().warning(throwable);
     }
 
 
@@ -123,5 +125,27 @@ public abstract class SimpleResult {
                 .map(next -> SimpleResult.ok())
                 .onErrorResume(t -> Mono.just(SimpleResult.fail(t)))
                 .switchIfEmpty(Mono.just(SimpleResult.fail("Mono ended empty.")));
+    }
+
+    /**
+     * Creates new {@link Resultable} from provided values.
+     *
+     * @param status    status of this Resultable
+     * @param message   message
+     * @param throwable error
+     * @return new Resultable from the values.
+     */
+    public static Resultable from(ResultStatus status, String message, Throwable throwable) {
+        return Resulters.resulter().from(status, message, throwable);
+    }
+
+    /**
+     * Tries to convert given {@link Object} into {@link Resultable}.
+     *
+     * @param input input
+     * @return Resultable
+     */
+    public static Resultable convert(Object input) {
+        return Resulters.resulter().convert(input);
     }
 }

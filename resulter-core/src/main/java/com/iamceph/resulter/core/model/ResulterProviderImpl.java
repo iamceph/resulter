@@ -54,7 +54,12 @@ class ResulterProviderImpl implements ResulterProvider {
     }
 
     @Override
+    public Resultable from(ResultStatus status, String message, Throwable throwable) {
+        return new ResultableImpl(status, message, throwable);
+    }
+
+    @Override
     public Resultable convert(Object input) {
-        return Resulters.CONVERTOR().convert(input);
+        return Resulters.convertor().convert(input);
     }
 }

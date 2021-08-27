@@ -1,5 +1,8 @@
 package com.iamceph.resulter.core.api;
 
+import java.util.Arrays;
+import java.util.List;
+
 import lombok.Getter;
 
 /**
@@ -20,13 +23,22 @@ public enum ResultStatus {
      */
     WARNING(2);
 
+    private final static List<ResultStatus> VALUES = Arrays.asList(values());
+
     /**
      * Number value of this {@link Resultable}. Useful for converting to gRPC for example :)
      */
     @Getter
-    private final Integer numberValue;
+    private final int numberValue;
 
-    ResultStatus(Integer numberValue) {
+    ResultStatus(int numberValue) {
         this.numberValue = numberValue;
+    }
+
+    public static ResultStatus fromNumber(int input) {
+        return VALUES.stream()
+                .filter(next -> next.getNumberValue() == input)
+                .findFirst()
+                .orElse(ResultStatus.FAIL);
     }
 }

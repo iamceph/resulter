@@ -1,13 +1,15 @@
 package com.iamceph.resulter.core;
 
+import java.util.function.Supplier;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import com.iamceph.resulter.core.api.DataResultable;
 import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.model.Resulters;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import reactor.core.publisher.Mono;
 
-import java.util.function.Supplier;
+import reactor.core.publisher.Mono;
 
 /**
  * DataResult is a "simple" access point for creating {@link DataResultable}.
@@ -22,7 +24,7 @@ public abstract class DataResult {
      * @return OK DataResultable.
      */
     public static <T> DataResultable<T> ok(@NotNull T data) {
-        return Resulters.DATA_RESULTER().ok(data);
+        return Resulters.dataResulter().ok(data);
     }
 
     /**
@@ -34,7 +36,7 @@ public abstract class DataResult {
      * @return OK DataResultable.
      */
     public static <T> DataResultable<T> ok(@NotNull T data, @NotNull String message) {
-        return Resulters.DATA_RESULTER().ok(data, message);
+        return Resulters.dataResulter().ok(data, message);
     }
 
     /**
@@ -45,7 +47,7 @@ public abstract class DataResult {
      * @return FAIL DataResultable.
      */
     public static <T> DataResultable<T> fail(@NotNull String message) {
-        return Resulters.DATA_RESULTER().fail(message);
+        return Resulters.dataResulter().fail(message);
     }
 
     /**
@@ -56,7 +58,7 @@ public abstract class DataResult {
      * @return FAIL DataResultable.
      */
     public static <T> DataResultable<T> fail(@NotNull Throwable throwable) {
-        return Resulters.DATA_RESULTER().fail(throwable);
+        return Resulters.dataResulter().fail(throwable);
     }
 
     /**
@@ -68,7 +70,7 @@ public abstract class DataResult {
      * @return FAIL DataResultable.
      */
     public static <T> DataResultable<T> fail(@NotNull T data, @NotNull String message) {
-        return Resulters.DATA_RESULTER().fail(data, message);
+        return Resulters.dataResulter().fail(data, message);
     }
 
     /**
@@ -81,7 +83,7 @@ public abstract class DataResult {
      * @return FAIL DataResultable.
      */
     public static <T> DataResultable<T> fail(@NotNull T data, @NotNull String message, @NotNull Throwable throwable) {
-        return Resulters.DATA_RESULTER().fail(data, message, throwable);
+        return Resulters.dataResulter().fail(data, message, throwable);
     }
 
     /**
@@ -93,7 +95,7 @@ public abstract class DataResult {
      * @return FAIL DataResultable.
      */
     public static <T> DataResultable<T> fail(@NotNull String message, @NotNull Throwable throwable) {
-        return Resulters.DATA_RESULTER().fail(message, throwable);
+        return Resulters.dataResulter().fail(message, throwable);
     }
 
     /**
@@ -104,7 +106,7 @@ public abstract class DataResult {
      * @return WARNING DataResultable.
      */
     public static <T> DataResultable<T> warning(@NotNull String message) {
-        return Resulters.DATA_RESULTER().warning(message);
+        return Resulters.dataResulter().warning(message);
     }
 
     /**
@@ -115,7 +117,7 @@ public abstract class DataResult {
      * @return WARNING DataResultable.
      */
     public static <T> DataResultable<T> warning(@NotNull Throwable throwable) {
-        return Resulters.DATA_RESULTER().warning(throwable);
+        return Resulters.dataResulter().warning(throwable);
     }
 
     /**
@@ -127,7 +129,7 @@ public abstract class DataResult {
      * @return WARNING DataResultable.
      */
     public static <T> DataResultable<T> warning(@NotNull T data, @NotNull String message) {
-        return Resulters.DATA_RESULTER().warning(data, message);
+        return Resulters.dataResulter().warning(data, message);
     }
 
     /**
@@ -140,7 +142,7 @@ public abstract class DataResult {
      * @return WARNING DataResultable.
      */
     public static <T> DataResultable<T> warning(@NotNull T data, @NotNull String message, @NotNull Throwable throwable) {
-        return Resulters.DATA_RESULTER().warning(data, message, throwable);
+        return Resulters.dataResulter().warning(data, message, throwable);
     }
 
     /**
@@ -152,7 +154,7 @@ public abstract class DataResult {
      * @return WARNING DataResultable.
      */
     public static <T> DataResultable<T> warning(@NotNull String message, @NotNull Throwable throwable) {
-        return Resulters.DATA_RESULTER().warning(message, throwable);
+        return Resulters.dataResulter().warning(message, throwable);
     }
 
     /**

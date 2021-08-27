@@ -229,6 +229,7 @@ public class DataResultTest {
     public void testDataMono() {
         final var testMono = Mono.just("Test");
 
+        assertNotNull(testMono);
         StepVerifier.create(DataResult.mono(testMono))
                 .assertNext(DataResultable::hasData)
                 .verifyComplete();
@@ -238,6 +239,7 @@ public class DataResultTest {
     public void testEmptyMono() {
         final var testMono = Mono.empty();
 
+        assertNotNull(testMono);
         StepVerifier.create(DataResult.mono(testMono))
                 .assertNext(next -> {
                     if (next.hasData()) {

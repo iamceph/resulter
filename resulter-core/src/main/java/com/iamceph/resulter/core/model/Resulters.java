@@ -2,10 +2,11 @@ package com.iamceph.resulter.core.model;
 
 import com.iamceph.resulter.core.api.DataResultable;
 import com.iamceph.resulter.core.api.Resultable;
-import com.iamceph.resulter.core.provider.DataResulterProvider;
 import com.iamceph.resulter.core.extension.ConvertorExtension;
 import com.iamceph.resulter.core.extension.ConvertorExtensionImpl;
+import com.iamceph.resulter.core.provider.DataResulterProvider;
 import com.iamceph.resulter.core.provider.ResulterProvider;
+
 import lombok.experimental.UtilityClass;
 
 /**
@@ -38,7 +39,7 @@ public class Resulters {
     /**
      * @return current available {@link ResulterProvider}
      */
-    public ResulterProvider RESULTER() {
+    public ResulterProvider resulter() {
         return RESULTER_PROVIDER;
     }
 
@@ -47,11 +48,11 @@ public class Resulters {
      *
      * @param provider the new provider
      */
-    public void RESULTER(ResulterProvider provider) {
+    public void resulter(ResulterProvider provider) {
         Resulters.RESULTER_PROVIDER = provider;
     }
 
-    public DataResulterProvider DATA_RESULTER() {
+    public DataResulterProvider dataResulter() {
         return DATA_RESULTER_INSTANCE;
     }
 
@@ -60,15 +61,15 @@ public class Resulters {
      *
      * @param provider the new provider
      */
-    public void DATA_RESULTER(DataResulterProvider provider) {
+    public void dataResulter(DataResulterProvider provider) {
         Resulters.DATA_RESULTER_INSTANCE = provider;
     }
 
-    public ConvertorExtension CONVERTOR() {
+    public ConvertorExtension convertor() {
         return CONVERTOR;
     }
 
-    public void CONVERTOR(ConvertorExtension convertorExtension) {
+    public void convertor(ConvertorExtension convertorExtension) {
         CONVERTOR = convertorExtension;
     }
 }

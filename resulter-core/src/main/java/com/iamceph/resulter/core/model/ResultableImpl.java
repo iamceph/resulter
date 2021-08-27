@@ -50,12 +50,12 @@ class ResultableImpl implements Resultable {
         return new Convertor() {
             @Override
             public String json() {
-                return Resulters.CONVERTOR().json(ResultableImpl.this);
+                return Resulters.convertor().json(ResultableImpl.this);
             }
 
             @Override
             public <K> K convert(Class<K> target) {
-                return Resulters.CONVERTOR().convert(ResultableImpl.this, target);
+                return Resulters.convertor().convert(ResultableImpl.this, target);
             }
         };
     }
