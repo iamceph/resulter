@@ -1,6 +1,7 @@
 # Resulter
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.iamceph.resulter/resulter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.iamceph.resulter/resulter)
 [![javadoc](https://javadoc.io/badge2/com.iamceph.resulter/resulter/javadoc.svg)](https://javadoc.io/doc/com.iamceph.resulter/resulter)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7bcf72e06caa4df8abab10b8ff2e2a87)](https://www.codacy.com/gh/iamceph/resulter/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=iamceph/resulter&amp;utm_campaign=Badge_Grade)
 
 Tired of throwing exceptions or returning nonsense? Well, Resulter will save you! 
 
