@@ -45,7 +45,7 @@ class DataResulterProviderImpl implements DataResulterProvider {
 
     @Override
     public <T> DataResultable<T> fail(String message, Throwable throwable) {
-        return new DataResultableImpl<>(ResultStatus.FAIL, message, throwable, null);
+        return new DataResultableImpl<>(ResultStatus.FAIL, message != null ? message : throwable.getMessage(), throwable, null);
     }
 
     @Override

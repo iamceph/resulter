@@ -1,15 +1,13 @@
 package com.iamceph.resulter.core;
 
-import java.util.function.Supplier;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import com.iamceph.resulter.core.api.DataResultable;
 import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.model.Resulters;
-
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import reactor.core.publisher.Mono;
+
+import java.util.function.Supplier;
 
 /**
  * DataResult is a "simple" access point for creating {@link DataResultable}.
@@ -94,7 +92,7 @@ public abstract class DataResult {
      * @param <T>       type of the data.
      * @return FAIL DataResultable.
      */
-    public static <T> DataResultable<T> fail(@NotNull String message, @NotNull Throwable throwable) {
+    public static <T> DataResultable<T> fail(@Nullable String message, @NotNull Throwable throwable) {
         return Resulters.dataResulter().fail(message, throwable);
     }
 
