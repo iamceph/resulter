@@ -21,8 +21,8 @@ allprojects {
 nexusPublishing {
     repositories {
         sonatype {
-            username = MAVEN_CENTRAL_USERNAME
-            password = MAVEN_CENTRAL_PASSWORD
+            username = NEXUS_USERNAME
+            password = NEXUS_PASSWORD
 
             nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
             snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
