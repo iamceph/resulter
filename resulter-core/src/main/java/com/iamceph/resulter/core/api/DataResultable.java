@@ -2,7 +2,6 @@ package com.iamceph.resulter.core.api;
 
 import com.iamceph.resulter.core.DataResult;
 import com.iamceph.resulter.core.model.Resulters;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -25,9 +24,9 @@ public interface DataResultable<T> extends Resultable {
     boolean hasData();
 
     /**
-     * @return data for this resultable. Null if not present :)
+     * @return data for this resultable. Null if not present, duh. :)
      */
-    @Nullable T data();
+    T data();
 
     /**
      * Tries to filter the input data and decides if the result should FAIL or return OK.
@@ -52,7 +51,7 @@ public interface DataResultable<T> extends Resultable {
     }
 
     /**
-     * @param predicate    data check
+     * @param predicate data check
      * @return {@link DataResult#fail(String)} if the predicate fails
      * @see DataResultable#filter(Predicate, String) filter
      */
