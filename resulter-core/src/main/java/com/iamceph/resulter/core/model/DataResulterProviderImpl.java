@@ -2,9 +2,9 @@ package com.iamceph.resulter.core.model;
 
 import com.iamceph.resulter.core.api.DataResultable;
 import com.iamceph.resulter.core.api.ResultStatus;
-import com.iamceph.resulter.core.provider.DataResulterProvider;
+import com.iamceph.resulter.core.api.provider.DataResulterProvider;
 
-class DataResulterProviderImpl implements DataResulterProvider {
+final class DataResulterProviderImpl implements DataResulterProvider {
 
     private DataResulterProviderImpl() {
     }

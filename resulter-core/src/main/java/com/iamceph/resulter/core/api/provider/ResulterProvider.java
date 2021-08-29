@@ -1,4 +1,4 @@
-package com.iamceph.resulter.core.provider;
+package com.iamceph.resulter.core.api.provider;
 
 import com.iamceph.resulter.core.SimpleResult;
 import com.iamceph.resulter.core.api.ResultStatus;

@@ -17,8 +17,8 @@ import lombok.experimental.Accessors;
 @Getter
 @ToString(callSuper = true)
 @Accessors(fluent = true)
-class DataResultableImpl<T> extends ResultableImpl implements DataResultable<T> {
-    protected final T data;
+final class DataResultableImpl<T> extends ResultableImpl implements DataResultable<T> {
+    private final T data;
 
     DataResultableImpl(ResultStatus status, String message, Throwable error, T data) {
         super(status, message, error);
