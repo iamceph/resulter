@@ -1,6 +1,7 @@
 package com.iamceph.resulter.core.api;
 
 import com.iamceph.resulter.core.DataResult;
+import com.iamceph.resulter.core.model.Result;
 import com.iamceph.resulter.core.model.Resulters;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -68,6 +69,14 @@ public interface Resultable extends Serializable, Cloneable {
          * @return converted {@link Resultable}
          */
         <K> K convert(Class<K> target);
+
+        /**
+         * Converts this Resultable info gRPC generated {@link Result}.
+         * @return {@link Result} for gRPC.
+         */
+        default Result grpc() {
+            return convert(Result.class);
+        }
     }
 
     /**
