@@ -4,14 +4,14 @@ plugins {
     id 'idea'
     id 'signing'
     id 'maven-publish'
-    id 'io.freefair.lombok' version '6.1.0'
+    id 'io.freefair.lombok' version '6.2.0'
 
     id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
 }
 
 allprojects {
     group 'com.iamceph.resulter'
-    version '1.0.4'
+    version '1.1.0'
 
     repositories {
         mavenCentral()
@@ -48,9 +48,7 @@ subprojects {
 
     dependencies {
         compileOnly group: 'org.jetbrains', name: 'annotations', version: JETBRAINS_ANNOTATIONS_VERSION
-    }
 
-    dependencies {
         testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: JUNIT_VERSION
     }
 
@@ -62,6 +60,11 @@ subprojects {
         withSourcesJar()
         withJavadocJar()
     }
+
+    tasks.withType(JavaCompile,{
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    })
 
     publishing {
         publications {

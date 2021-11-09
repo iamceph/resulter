@@ -1,8 +1,8 @@
 package com.iamceph.resulter.core.api.provider;
 
-import com.iamceph.resulter.core.api.DataResultable;
-import com.iamceph.resulter.core.api.GroupedResultable;
-import com.iamceph.resulter.core.api.Resultable;
+import com.iamceph.resulter.core.DataResultable;
+import com.iamceph.resulter.core.GroupedResultable;
+import com.iamceph.resulter.core.Resultable;
 
 import java.util.Collection;
 

@@ -2,7 +2,7 @@ name: build
 on: [ push, pull_request ]
 
 env:
-  MIN_JVM: 11
+  MIN_JVM: 8
   MAX_JVM: 16
 
 jobs:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ 11, 16 ]
+        java: [ 8, 16 ]
     steps:
       - uses: actions/checkout@v2.3.4
       - name: Set up JDK ${{ matrix.java }}

@@ -1,6 +1,6 @@
 package com.iamceph.resulter.core.model;
 
-import com.iamceph.resulter.core.api.DataResultable;
+import com.iamceph.resulter.core.DataResultable;
 import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.api.provider.DataResulterProvider;
 

@@ -1,60 +1,59 @@
 package com.iamceph.resulter.core.api.provider;
 
-import com.iamceph.resulter.core.SimpleResult;
 import com.iamceph.resulter.core.api.ResultStatus;
-import com.iamceph.resulter.core.api.Resultable;
+import com.iamceph.resulter.core.Resultable;
 
 /**
  * Service that provides {@link Resultable}.
  */
 public interface ResulterProvider {
     /**
-     * @see SimpleResult#ok()
+     * @see Resultable#ok()
      */
     Resultable ok();
 
     /**
-     * @see SimpleResult#ok(String) 
+     * @see Resultable#ok(String) 
      */
     Resultable ok(String message);
 
     /**
-     * @see SimpleResult#fail(String) 
+     * @see Resultable#fail(String) 
      */
     Resultable fail(String message);
 
     /**
-     * @see SimpleResult#fail(String, Throwable) 
+     * @see Resultable#fail(String, Throwable) 
      */
     Resultable fail(String message, Throwable throwable);
 
     /**
-     * @see SimpleResult#fail(Throwable) 
+     * @see Resultable#fail(Throwable) 
      */
     Resultable fail(Throwable throwable);
 
     /**
-     * @see SimpleResult#warning(String) 
+     * @see Resultable#warning(String) 
      */
     Resultable warning(String message);
 
     /**
-     * @see SimpleResult#warning(String, Throwable) 
+     * @see Resultable#warning(String, Throwable) 
      */
     Resultable warning(String message, Throwable throwable);
 
     /**
-     * @see SimpleResult#warning(Throwable)
+     * @see Resultable#warning(Throwable)
      */
     Resultable warning(Throwable throwable);
 
     /**
-     * @see SimpleResult#from(ResultStatus, String, Throwable)
+     * @see Resultable#from(ResultStatus, String, Throwable)
      */
     Resultable from(ResultStatus status, String message, Throwable throwable);
 
     /**
-     * @see SimpleResult
+     * @see Resultable
      */
     Resultable convert(Object input);
 }

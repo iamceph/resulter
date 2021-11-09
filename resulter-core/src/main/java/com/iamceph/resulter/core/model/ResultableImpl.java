@@ -1,7 +1,7 @@
 package com.iamceph.resulter.core.model;
 
 import com.iamceph.resulter.core.api.ResultStatus;
-import com.iamceph.resulter.core.api.Resultable;
+import com.iamceph.resulter.core.Resultable;
 import lombok.*;
 import lombok.experimental.Accessors;
 

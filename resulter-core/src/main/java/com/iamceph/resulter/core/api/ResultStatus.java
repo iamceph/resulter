@@ -1,9 +1,10 @@
 package com.iamceph.resulter.core.api;
 
+import com.iamceph.resulter.core.Resultable;
+import lombok.Getter;
+
 import java.util.Arrays;
 import java.util.List;
-
-import lombok.Getter;
 
 /**
  * Status of given {@link Resultable}.

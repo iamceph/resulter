@@ -1,6 +1,6 @@
 package com.iamceph.resulter.core.extension;
 
-import com.iamceph.resulter.core.api.Resultable;
+import com.iamceph.resulter.core.Resultable;
 
 /**
  * @author Frantisek Novosad (fnovosad@monetplus.cz)

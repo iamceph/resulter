@@ -1,16 +1,17 @@
 package com.iamceph.resulter.core;
 
-import static org.junit.jupiter.api.Assertions.*;
+import lombok.var;
+import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class SimpleResultTest {
+public class ResultableTest {
 
     @Test
     public void testOk() {
-        final var result = SimpleResult.ok();
+        final var result = Resultable.ok();
 
         assertTrue(result.isOk());
 
@@ -25,7 +26,7 @@ public class SimpleResultTest {
 
     @Test
     public void testOkWithMessage() {
-        final var result = SimpleResult.ok("test message");
+        final var result = Resultable.ok("test message");
 
         assertTrue(result.isOk());
 
@@ -40,7 +41,7 @@ public class SimpleResultTest {
 
     @Test
     public void testFailWithMessage() {
-        final var result = SimpleResult.fail("test message");
+        final var result = Resultable.fail("test message");
 
         assertTrue(result.isFail());
 
@@ -55,7 +56,7 @@ public class SimpleResultTest {
 
     @Test
     public void testFailWithMessageAndThrowable() {
-        final var result = SimpleResult.fail("test message", new UnsupportedOperationException("This is not supposed to happen. :)"));
+        final var result = Resultable.fail("test message", new UnsupportedOperationException("This is not supposed to happen. :)"));
 
         assertTrue(result.isFail());
 
@@ -72,7 +73,7 @@ public class SimpleResultTest {
 
     @Test
     public void testFailWithThrowable() {
-        final var result = SimpleResult.fail(new UnsupportedOperationException("This is not supposed to happen. :)"));
+        final var result = Resultable.fail(new UnsupportedOperationException("This is not supposed to happen. :)"));
 
         assertTrue(result.isFail());
 
@@ -89,7 +90,7 @@ public class SimpleResultTest {
 
     @Test
     public void testWarningWithMessage() {
-        final var result = SimpleResult.warning("test message");
+        final var result = Resultable.warning("test message");
 
         assertTrue(result.isWarning());
 
@@ -104,7 +105,7 @@ public class SimpleResultTest {
 
     @Test
     public void testWarningWithMessageAndThrowable() {
-        final var result = SimpleResult.warning("test message", new UnsupportedOperationException("This is not supposed to happen. :)"));
+        final var result = Resultable.warning("test message", new UnsupportedOperationException("This is not supposed to happen. :)"));
 
         assertTrue(result.isWarning());
 
@@ -121,7 +122,7 @@ public class SimpleResultTest {
 
     @Test
     public void testWarningWithThrowable() {
-        final var result = SimpleResult.warning(new UnsupportedOperationException("This is not supposed to happen. :)"));
+        final var result = Resultable.warning(new UnsupportedOperationException("This is not supposed to happen. :)"));
 
         assertTrue(result.isWarning());
 

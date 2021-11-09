@@ -1,6 +1,7 @@
-package com.iamceph.resulter.core.api;
+package com.iamceph.resulter.core;
 
-import com.iamceph.resulter.core.GroupedResult;
+import com.iamceph.resulter.core.api.GroupedThrowable;
+import com.iamceph.resulter.core.model.Resulters;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
@@ -11,6 +12,42 @@ import java.util.List;
  * This could be useful when more Resultables needs to be merged into one.
  */
 public interface GroupedResultable extends Resultable {
+
+
+    /**
+     * Creates empty {@link GroupedResultable}
+     *
+     * @return empty {@link GroupedResultable}.
+     */
+    static GroupedResultable of() {
+        return Resulters.groupedResulter().of();
+    }
+
+    /**
+     * Creates new {@link GroupedResultable} with provided {@link Resultable}s.
+     *
+     * @return new {@link GroupedResultable}.
+     */
+    static GroupedResultable of(Resultable... resultable) {
+        return Resulters.groupedResulter().of(resultable);
+    }
+
+    /**
+     * Creates new {@link GroupedResultable} with provided {@link Resultable}s.
+     *
+     * @return new {@link GroupedResultable}.
+     */
+    static GroupedResultable of(Collection<Resultable> resultable) {
+        return Resulters.groupedResulter().of(resultable);
+    }
+
+    static GroupedResultable.Builder builder() {
+        return new GroupedResultableBuilder();
+    }
+
+    static GroupedResultable.Builder builder(List<Resultable> from) {
+        return new GroupedResultableBuilder(from);
+    }
 
     /**
      * @return a {@link GroupedThrowable}
@@ -47,7 +84,7 @@ public interface GroupedResultable extends Resultable {
     List<Resultable> resultables();
 
     default Builder toBuilder() {
-        return GroupedResult.builder(resultables());
+        return GroupedResultable.builder(resultables());
     }
 
     /**
@@ -60,6 +97,7 @@ public interface GroupedResultable extends Resultable {
 
         /**
          * Creates new GroupedResutable from the builder.
+         *
          * @return
          */
         GroupedResultable build();

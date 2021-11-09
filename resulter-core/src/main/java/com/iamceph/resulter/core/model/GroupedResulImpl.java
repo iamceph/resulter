@@ -1,33 +1,34 @@
 package com.iamceph.resulter.core.model;
 
-import com.iamceph.resulter.core.api.GroupedResultable;
+import com.iamceph.resulter.core.GroupedResultable;
+import com.iamceph.resulter.core.Resultable;
 import com.iamceph.resulter.core.api.GroupedThrowable;
 import com.iamceph.resulter.core.api.ResultStatus;
-import com.iamceph.resulter.core.api.Resultable;
+import lombok.var;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  * Default implementation of the {@link GroupedResultable}
  */
-final class GroupedResultableImpl implements GroupedResultable {
+final class GroupedResulImpl implements GroupedResultable {
     private final List<Resultable> resultables;
     private final Long failResultables;
     private final Long warningResultables;
 
-    GroupedResultableImpl(Collection<Resultable> resultables) {
-        this.resultables = List.copyOf(resultables);
+    GroupedResulImpl(Collection<Resultable> resultables) {
+        this.resultables = new LinkedList<>(resultables);
 
-        failResultables = this.resultables.stream()
+        failResultables = this.resultables
+                .stream()
                 .filter(result -> result.status() == ResultStatus.FAIL)
                 .count();
-        warningResultables = this.resultables.stream()
+        warningResultables = this.resultables
+                .stream()
                 .filter(result -> result.status() == ResultStatus.WARNING)
                 .count();
     }
@@ -52,12 +53,12 @@ final class GroupedResultableImpl implements GroupedResultable {
 
     @Override
     public GroupedResultable merge(Resultable... resultables) {
-       return merge(List.of(resultables));
+        return merge(Arrays.stream(resultables).collect(Collectors.toList()));
     }
 
     @Override
     public GroupedResultable merge(Collection<Resultable> resultables) {
-        return new GroupedResultableImpl(Stream.concat(resultables.stream(), this.resultables.stream())
+        return new GroupedResulImpl(Stream.concat(resultables.stream(), this.resultables.stream())
                 .collect(Collectors.toList()));
     }
 
@@ -102,18 +103,18 @@ final class GroupedResultableImpl implements GroupedResultable {
         return new Convertor() {
             @Override
             public String json() {
-                return Resulters.convertor().json(GroupedResultableImpl.this);
+                return Resulters.convertor().json(GroupedResulImpl.this);
             }
 
             @Override
             public <K> K convert(Class<K> target) {
-                return Resulters.convertor().convert(GroupedResultableImpl.this, target);
+                return Resulters.convertor().convert(GroupedResulImpl.this, target);
             }
         };
     }
 
     public List<Resultable> resultables() {
-        return List.copyOf(resultables);
+        return Collections.unmodifiableList(resultables);
     }
 
     private String toLineMessage() {

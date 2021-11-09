@@ -1,11 +1,10 @@
 package com.iamceph.resulter.core;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import com.iamceph.resulter.core.model.Resulters;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.iamceph.resulter.core.model.Resulters;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author Frantisek Novosad (fnovosad@monetplus.cz)
@@ -18,6 +17,6 @@ public class ResultersTest {
         assertNotNull(Resulters.dataResulter());
         assertNotNull(Resulters.convertor());
 
-        Assertions.assertEquals(Resulters.resulter().ok(), SimpleResult.ok());
+        Assertions.assertEquals(Resulters.resulter().ok(), Resultable.ok());
     }
 }

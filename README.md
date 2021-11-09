@@ -15,10 +15,10 @@ Resulter provides simple to use Results. Why? Well, there are few benefits.
 ### Example
 ```java
 //this operation ended normally
-Resultable okResult = SimpleResult.ok();
+Resultable okResult = Resultable.ok();
 
 //this operation failed because it cannot find given user.
-Resultable failedResult = SimpleResult.fail("Cannot find user!");
+Resultable failedResult = Resultable.fail("Cannot find user!");
 ```
 
 #### Example usage
@@ -26,10 +26,10 @@ Resultable failedResult = SimpleResult.fail("Cannot find user!");
 
 public Resultable isAccessAllowed(Integer userId) {
     if (userId == 1) {
-        return SimpleResult.ok();
+        return Resultable.ok();
         }
     
-    return SimpleResult.fail("User is not allowed to access.");
+    return Resultable.fail("User is not allowed to access.");
 }
 
 public DataResultable<User> anotherCheck(Integer userId) {
@@ -40,6 +40,6 @@ public DataResultable<User> anotherCheck(Integer userId) {
     }
     
     //this will fail if the user does not exist in the repo, neat, right? :)
-    return DataResult.failIfNull(userRepository.findUser(userId));
+    return DataResultable.failIfNull(userRepository.findUser(userId));
 }
 ```
