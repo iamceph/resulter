@@ -2,6 +2,7 @@ package com.iamceph.resulter.core;
 
 import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.model.Resulters;
+import lombok.var;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import reactor.core.publisher.Mono;
@@ -216,6 +217,30 @@ public interface DataResultable<T> extends Resultable {
     }
 
     /**
+     * Tries to convert given {@link Object} into {@link DataResultable}.
+     *
+     * @param input input
+     * @return Resultable
+     */
+    static <T> DataResultable<T> from(Object input, T data) {
+        final var result = Resulters.resulter().convert(input);
+        return result.transform(data);
+    }
+
+    /**
+     * Tries to convert given {@link Optional} into {@link DataResultable}.
+     *
+     * @param input input
+     * @return Resultable
+     */
+    static <T> DataResultable<T> fromOptional(Optional<T> input) {
+        if (input.isPresent()) {
+            return DataResultable.ok(input.get());
+        }
+        return DataResultable.fail("No data present.");
+    }
+
+    /**
      * Tries to filter the input data and decides if the result should FAIL or return OK.
      *
      * @param predicate    data check
@@ -299,8 +324,8 @@ public interface DataResultable<T> extends Resultable {
     }
 
     /**
-     * If the data is OK, maps them into something else.
-     * Exception handling is done, return {@link DataResultable#fail(String, Throwable)} if that happens.
+     * Maps given data to something else with given function.
+     * This can only happen if the {@link DataResultable} is {@link ResultStatus#OK}.
      *
      * @param mapper mapping function
      * @param <K>    new type of the data
@@ -316,6 +341,27 @@ public interface DataResultable<T> extends Resultable {
         } catch (Throwable t) {
             return DataResultable.fail("map() failed because of Throwable.", t);
         }
+    }
+
+    /**
+     * Maps given data to different {@link DataResultable}.
+     * This can only happen if the {@link DataResultable} is {@link ResultStatus#OK}.
+     *
+     * @param mapper mapping function
+     * @param <K>    new type of the data
+     * @return OK Resultable if the data are OK.
+     */
+    default <K> DataResultable<K> flatMap(Function<T, DataResultable<K>> mapper) {
+        if (isFail()) {
+            return transform();
+        }
+
+        try {
+            return mapper.apply(data());
+        } catch (Throwable t) {
+            return DataResultable.fail("flatMap() failed because of Throwable.", t);
+        }
+
     }
 
     /**

@@ -1,5 +1,5 @@
 plugins {
-    id "com.google.protobuf" version "0.8.17"
+    id "com.google.protobuf" version "0.8.18"
 }
 
 apply plugin: "com.google.protobuf"
@@ -15,6 +15,9 @@ dependencies {
     compileOnly group: 'io.grpc', name: 'grpc-api', version: GRPC_VERSION
     compileOnly group: 'io.grpc', name: 'grpc-protobuf', version: GRPC_VERSION
     compileOnly group: 'io.grpc', name: 'protoc-gen-grpc-java', version: GRPC_VERSION
+
+    compileOnly group: 'com.google.code.gson', name: 'gson', version: GSON_VERSION
+    compileOnly group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: JACKSON_VERSION
 
     testImplementation group: 'io.projectreactor', name: 'reactor-test', version: REACTOR_VERSION
 }

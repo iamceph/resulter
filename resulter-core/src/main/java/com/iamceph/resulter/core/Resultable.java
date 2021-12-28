@@ -3,6 +3,7 @@ package com.iamceph.resulter.core;
 import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.model.GrpcResultable;
 import com.iamceph.resulter.core.model.Resulters;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import reactor.core.publisher.Mono;
@@ -190,6 +191,16 @@ public interface Resultable extends Serializable, Cloneable {
     }
 
     /**
+     * For mappings or other stuff only.
+     *
+     * @return {@link Resultable#message()}
+     */
+    @ApiStatus.Internal
+    default String getMessage() {
+        return message();
+    }
+
+    /**
      * @return current state of this Result.
      */
     @NotNull ResultStatus status();
@@ -197,7 +208,7 @@ public interface Resultable extends Serializable, Cloneable {
     /**
      * @return message for this result, null if not defined.
      */
-    @Nullable String message();
+    @NotNull String message();
 
     /**
      * @return error for this result, null if not defined.
@@ -230,6 +241,9 @@ public interface Resultable extends Serializable, Cloneable {
      */
     Convertor convertor();
 
+    /**
+     * Convertor that converts from/to {@link Resultable}.
+     */
     interface Convertor {
         /**
          * Converts this {@link Resultable} into a JSON string.
