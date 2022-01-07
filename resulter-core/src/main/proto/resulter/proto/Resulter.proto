@@ -5,7 +5,19 @@ package resulter.proto;
 option java_multiple_files = true;
 option java_package = "com.iamceph.resulter.core.model";
 
-message GrpcResultable {
+import "google/protobuf/any.proto";
+
+message ResultableData {
+  /**
+  UUID of the operation or data holder.
+   */
+  string uuid = 1;
+  ProtoResultable result = 2;
+
+  google.protobuf.Any data = 3;
+}
+
+message ProtoResultable {
   enum Status {
     FAIL = 0;
     OK = 1;
