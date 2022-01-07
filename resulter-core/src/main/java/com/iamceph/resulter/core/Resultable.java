@@ -1,15 +1,17 @@
 package com.iamceph.resulter.core;
 
-import com.iamceph.resulter.core.api.ResultStatus;
-import com.iamceph.resulter.core.model.GrpcResultable;
-import com.iamceph.resulter.core.model.Resulters;
+import java.io.Serializable;
+import java.util.function.Supplier;
+
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import reactor.core.publisher.Mono;
 
-import java.io.Serializable;
-import java.util.function.Supplier;
+import com.iamceph.resulter.core.api.ResultStatus;
+import com.iamceph.resulter.core.model.ProtoResultable;
+import com.iamceph.resulter.core.model.Resulters;
+
+import reactor.core.publisher.Mono;
 
 /**
  * The Resultable API.
@@ -262,12 +264,12 @@ public interface Resultable extends Serializable, Cloneable {
         <K> K convert(Class<K> target);
 
         /**
-         * Converts this Resultable info gRPC generated {@link GrpcResultable}.
+         * Converts this Resultable info gRPC generated {@link ProtoResultable}.
          *
-         * @return {@link GrpcResultable} for gRPC.
+         * @return {@link ProtoResultable} for gRPC.
          */
-        default GrpcResultable grpc() {
-            return convert(GrpcResultable.class);
+        default ProtoResultable grpc() {
+            return convert(ProtoResultable.class);
         }
     }
 }

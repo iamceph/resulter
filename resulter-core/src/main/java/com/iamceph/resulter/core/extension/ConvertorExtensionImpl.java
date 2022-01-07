@@ -1,15 +1,16 @@
 package com.iamceph.resulter.core.extension;
 
-import com.iamceph.resulter.core.Resultable;
-import com.iamceph.resulter.core.api.ResultStatus;
-import com.iamceph.resulter.core.model.GrpcResultable;
-import com.iamceph.resulter.core.model.ProtoThrowable;
-import com.iamceph.resulter.core.model.Resulters;
-import lombok.var;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.iamceph.resulter.core.Resultable;
+import com.iamceph.resulter.core.api.ResultStatus;
+import com.iamceph.resulter.core.model.ProtoResultable;
+import com.iamceph.resulter.core.model.ProtoThrowable;
+import com.iamceph.resulter.core.model.Resulters;
+
+import lombok.var;
 
 /**
  * Default implementation of ConvertorExtension.
@@ -26,15 +27,15 @@ public class ConvertorExtensionImpl implements ConvertorExtension {
 
     /**
      * Tries to convert Object into a Resultable.
-     * - supported type right now is {@link GrpcResultable}
+     * - supported type right now is {@link ProtoResultable}
      *
      * @param input input
      * @return OK resultable if everything is OK, otherwise FAIL.
      */
     @Override
     public Resultable convert(Object input) {
-        if (input instanceof GrpcResultable) {
-            final var casted = (GrpcResultable) input;
+        if (input instanceof ProtoResultable) {
+            final var casted = (ProtoResultable) input;
             final var status = ResultStatus.fromNumber(casted.getStatus().getNumber());
             final var error = new Throwable(casted.getError().getErrorMessage());
             error.setStackTrace(toStackTrace(casted.getError().getStackTraceList()).toArray(new StackTraceElement[0]));
@@ -48,7 +49,7 @@ public class ConvertorExtensionImpl implements ConvertorExtension {
     /**
      * Tries to convert Resultable into something else.
      * Supported types right now are:
-     * - {@link GrpcResultable}
+     * - {@link ProtoResultable}
      * - JSON string.
      *
      * @param resultable resultable to convert from
@@ -59,8 +60,8 @@ public class ConvertorExtensionImpl implements ConvertorExtension {
     @SuppressWarnings("unchecked")
     @Override
     public <T> T convert(Resultable resultable, Class<T> target) {
-        if (target.isAssignableFrom(GrpcResultable.class)) {
-            final var message = GrpcResultable.newBuilder();
+        if (target.isAssignableFrom(ProtoResultable.class)) {
+            final var message = ProtoResultable.newBuilder();
             final var error = resultable.error();
 
             if (error != null) {
@@ -71,11 +72,8 @@ public class ConvertorExtensionImpl implements ConvertorExtension {
                         .build();
             }
 
-            if (resultable.message() != null) {
-                message.setMessage(resultable.message());
-            }
-
-            message.setStatus(GrpcResultable.Status.forNumber(resultable.status().getNumberValue()));
+            message.setMessage(resultable.message());
+            message.setStatus(ProtoResultable.Status.forNumber(resultable.status().getNumberValue()));
             return (T) message.build();
         }
 
