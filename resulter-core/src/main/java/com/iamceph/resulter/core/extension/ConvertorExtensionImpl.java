@@ -1,16 +1,15 @@
 package com.iamceph.resulter.core.extension;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.iamceph.resulter.core.Resultable;
 import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.model.ProtoResultable;
 import com.iamceph.resulter.core.model.ProtoThrowable;
 import com.iamceph.resulter.core.model.Resulters;
-
 import lombok.var;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Default implementation of ConvertorExtension.
@@ -36,11 +35,20 @@ public class ConvertorExtensionImpl implements ConvertorExtension {
     public Resultable convert(Object input) {
         if (input instanceof ProtoResultable) {
             final var casted = (ProtoResultable) input;
+            final var message = casted.getMessage();
             final var status = ResultStatus.fromNumber(casted.getStatus().getNumber());
-            final var error = new Throwable(casted.getError().getErrorMessage());
-            error.setStackTrace(toStackTrace(casted.getError().getStackTraceList()).toArray(new StackTraceElement[0]));
+            final var error = casted.getError();
 
-            return Resulters.resulter().from(status, casted.getMessage(), error);
+            if (error.equals(ProtoThrowable.getDefaultInstance())) {
+                final var buildError = new Throwable(error.getErrorMessage());
+                buildError.setStackTrace(
+                        toStackTrace(error.getStackTraceList())
+                                .toArray(new StackTraceElement[0])
+                );
+                return Resulters.resulter().from(status, message, buildError);
+            }
+
+            return Resulters.resulter().from(status, message, null);
         }
 
         return Resultable.fail("Cannot convert input[" + input.getClass().getSimpleName() + "] to Resultable!");
