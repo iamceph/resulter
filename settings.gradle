@@ -1,3 +1,5 @@
 rootProject.name = 'resulter'
 
 include 'resulter-core'
+include 'kotlin-extensions'
+

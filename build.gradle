@@ -2,8 +2,6 @@ plugins {
     id 'java'
     id 'java-library'
     id 'idea'
-    id 'signing'
-    id 'maven-publish'
     id 'io.freefair.lombok' version '6.3.0'
 
     id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
@@ -11,7 +9,7 @@ plugins {
 
 allprojects {
     group 'com.iamceph.resulter'
-    version '1.1.3'
+    version '1.1.4'
 
     repositories {
         mavenCentral()
@@ -28,15 +26,6 @@ nexusPublishing {
             snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
         }
     }
-}
-
-signing {
-    def signingKeyId = findProperty("signingKeyId")
-    def signingKey = findProperty("signingKey")
-    def signingPassword = findProperty("signingPassword")
-    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
-
-    sign publishing.publications
 }
 
 subprojects {
@@ -58,71 +47,11 @@ subprojects {
 
     java {
         withSourcesJar()
-        withJavadocJar()
+        //withJavadocJar()
     }
 
     tasks.withType(JavaCompile,{
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     })
-
-    publishing {
-        publications {
-            release(MavenPublication) {
-                group = project.group
-                version project.version
-
-                it.artifact(project.tasks.sourcesJar)
-                it.artifact(project.tasks.javadocJar)
-                it.artifact(project.tasks.jar)
-
-                it.pom.withXml {
-                    def dependenciesNode = asNode().appendNode("dependencies")
-                    project.configurations.compileOnly.dependencies.each {
-                        if (!(it instanceof SelfResolvingDependency)) {
-                            def dependencyNode = dependenciesNode.appendNode('dependency')
-                            dependencyNode.appendNode('groupId', it.group)
-                            dependencyNode.appendNode('artifactId', it.name)
-                            dependencyNode.appendNode('version', it.version)
-                            dependencyNode.appendNode('scope', 'provided')
-                        }
-                    }
-                    if (!project.tasks.findByName("shadowJar")) {
-                        project.configurations.api.dependencies.each {
-                            def dependencyNode = dependenciesNode.appendNode('dependency')
-                            dependencyNode.appendNode('groupId', it.group)
-                            dependencyNode.appendNode('artifactId', it.name)
-                            dependencyNode.appendNode('version', it.version)
-                            dependencyNode.appendNode('scope', 'compile')
-                        }
-                    }
-                }
-
-                // Mostly self-explanatory metadata
-                pom {
-                    name = "Resulter"
-                    description = 'Tired of throwing exceptions or returning nonsense? Well, Resulter will save you!'
-                    url = 'https://github.com/iamceph/resulter'
-                    licenses {
-                        license {
-                            name = 'GPL-3.0 License'
-                            url = 'https://www.gnu.org/licenses/gpl-3.0.html'
-                        }
-                    }
-                    developers {
-                        developer {
-                            id = 'iamceph'
-                            name = 'Frantisek Novosad'
-                            email = 'frantisek@nvsd.dev'
-                        }
-                    }
-                    scm {
-                        connection = 'scm:git:github.com/iamceph/resulter.git'
-                        developerConnection = 'scm:git:ssh://github.com/iamceph/resulter.git'
-                        url = 'https://github.com/iamceph/resulter/tree/main'
-                    }
-                }
-            }
-        }
-    }
 }
