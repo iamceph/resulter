@@ -16,8 +16,8 @@ publishing {
             group = project.group
             version project.version
 
-            //it.artifact(project.tasks.sourcesJar)
-            //it.artifact(project.tasks.javadocJar)
+            it.artifact(project.tasks.sourcesJar)
+            it.artifact(project.tasks.javadocJar)
             it.artifact(project.tasks.jar)
 
             it.pom.withXml {

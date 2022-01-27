@@ -47,7 +47,7 @@ subprojects {
 
     java {
         withSourcesJar()
-        //withJavadocJar()
+        withJavadocJar()
     }
 
     tasks.withType(JavaCompile,{
