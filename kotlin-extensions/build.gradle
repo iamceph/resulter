@@ -1,0 +1,24 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
+    id 'java'
+    id 'java-library'
+}
+
+apply from: '../publishing.gradle'
+
+dependencies {
+    api project(":resulter-core")
+
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib"
+
+    //proto
+    compileOnly group: 'com.google.protobuf', name: 'protobuf-java', version: PROTOBUF_VERSION
+    //grpc
+    compileOnly group: 'io.grpc', name: 'grpc-protobuf', version: GRPC_VERSION
+
+    compileOnly group: 'io.projectreactor', name: 'reactor-core', version: REACTOR_VERSION
+}
+
+test {
+    useJUnitPlatform()
+}

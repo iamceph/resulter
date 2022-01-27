@@ -3,7 +3,7 @@ plugins {
 }
 
 apply plugin: "com.google.protobuf"
-
+apply from: '../publishing.gradle'
 
 dependencies {
     compileOnly group: 'io.projectreactor', name: 'reactor-core', version: REACTOR_VERSION

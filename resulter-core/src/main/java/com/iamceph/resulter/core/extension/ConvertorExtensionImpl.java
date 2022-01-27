@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * Default implementation of ConvertorExtension.
  */
 public class ConvertorExtensionImpl implements ConvertorExtension {
-    private final static ConvertorExtension INSTANCE = new ConvertorExtensionImpl();
+    private static final ConvertorExtension INSTANCE = new ConvertorExtensionImpl();
 
     protected ConvertorExtensionImpl() {
     }
@@ -39,7 +39,7 @@ public class ConvertorExtensionImpl implements ConvertorExtension {
             final var status = ResultStatus.fromNumber(casted.getStatus().getNumber());
             final var error = casted.getError();
 
-            if (error.equals(ProtoThrowable.getDefaultInstance())) {
+            if (!error.equals(ProtoThrowable.getDefaultInstance())) {
                 final var buildError = new Throwable(error.getErrorMessage());
                 buildError.setStackTrace(
                         toStackTrace(error.getStackTraceList())

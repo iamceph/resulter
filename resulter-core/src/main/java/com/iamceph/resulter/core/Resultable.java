@@ -1,17 +1,15 @@
 package com.iamceph.resulter.core;
 
-import java.io.Serializable;
-import java.util.function.Supplier;
-
-import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.model.ProtoResultable;
 import com.iamceph.resulter.core.model.Resulters;
-
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import reactor.core.publisher.Mono;
+
+import java.io.Serializable;
+import java.util.function.Supplier;
 
 /**
  * The Resultable API.
@@ -184,7 +182,7 @@ public interface Resultable extends Serializable, Cloneable {
         if (this instanceof DataResultable) {
             try {
                 return (DataResultable<T>) this;
-            } catch (Throwable t) {
+            } catch (Exception t) {
                 return DataResultable.fail("transform() failed because of Throwable.", t);
             }
         }

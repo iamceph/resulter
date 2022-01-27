@@ -24,7 +24,7 @@ public enum ResultStatus {
      */
     WARNING(2);
 
-    private final static List<ResultStatus> VALUES = Arrays.asList(values());
+    private static final List<ResultStatus> VALUES = Arrays.asList(values());
 
     /**
      * Number value of this {@link Resultable}. Useful for converting to gRPC for example :)
