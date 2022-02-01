@@ -23,7 +23,7 @@ on [Maven Central](https://search.maven.org/artifact/com.iamceph.resulter/result
 - Gradle
 
 ```groovy
-implementation 'com.iamceph.resulter:resulter:1.1.0'
+implementation 'com.iamceph.resulter:resulter-core:1.1.4'
 ```
 
 - Maven
@@ -31,8 +31,8 @@ implementation 'com.iamceph.resulter:resulter:1.1.0'
 ```xml
 <dependency>
     <groupId>com.iamceph.resulter</groupId>
-    <artifactId>resulter</artifactId>
-    <version>1.1.0</version>
+    <artifactId>resulter-core</artifactId>
+    <version>1.1.4</version>
 </dependency>
 ```
 
@@ -66,7 +66,7 @@ public class UserService {
         //let's get if the user can enter
         final Resultable result = isAccessAllowed(userId);
         if (result.isFail()) {
-            return result;
+            return result.transform();
         }
 
         //this will fail if the user does not exist in the repo, neat, right? :)
