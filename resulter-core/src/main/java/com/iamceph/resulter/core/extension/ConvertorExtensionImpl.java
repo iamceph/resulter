@@ -6,6 +6,7 @@ import com.iamceph.resulter.core.model.ProtoResultable;
 import com.iamceph.resulter.core.model.ProtoThrowable;
 import com.iamceph.resulter.core.model.Resulters;
 
+import lombok.val;
 import lombok.var;
 
 import java.util.Arrays;
@@ -77,7 +78,7 @@ public class ConvertorExtensionImpl implements ConvertorExtension {
 
             if (error != null) {
                 builder.setError(ProtoThrowable.newBuilder()
-                                .setErrorMessage(error.getMessage())
+                                .setErrorMessage(getOrEmpty(error.getMessage()))
                                 .addAllStackTrace(fromStackTrace(Arrays.asList(error.getStackTrace())))
                                 .build())
                         .build();
@@ -103,13 +104,20 @@ public class ConvertorExtensionImpl implements ConvertorExtension {
     private List<ProtoThrowable.ProtoStackTrace> fromStackTrace(List<StackTraceElement> elements) {
         return elements.stream()
                 .map(next -> ProtoThrowable.ProtoStackTrace.newBuilder()
-                        .setDeclaringClass(next.getClassName())
-                        .setMethodName(next.getMethodName())
-                        .setFileName(next.getFileName())
+                        .setDeclaringClass(getOrEmpty(next.getClassName()))
+                        .setMethodName(getOrEmpty(next.getMethodName()))
+                        .setFileName(getOrEmpty(next.getFileName()))
                         .setLineNumber(next.getLineNumber())
                         .build())
                 .collect(Collectors.toList());
 
+    }
+
+    private String getOrEmpty(String input) {
+        if (input == null) {
+            return "";
+        }
+        return input;
     }
 
     private List<StackTraceElement> toStackTrace(List<ProtoThrowable.ProtoStackTrace> elements) {

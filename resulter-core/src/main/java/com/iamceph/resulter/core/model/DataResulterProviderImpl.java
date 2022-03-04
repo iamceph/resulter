@@ -29,7 +29,7 @@ final class DataResulterProviderImpl implements DataResulterProvider {
 
     @Override
     public @NotNull <T> DataResultable<T> ok(@NotNull T data, @NotNull String message) {
-        return new DataResultableImpl<>(ResultStatus.OK, message, null, data);
+        return new DataResultableImpl<>(ResultStatus.OK, resolveMessage(message), null, data);
     }
 
     @Override
@@ -44,7 +44,7 @@ final class DataResulterProviderImpl implements DataResulterProvider {
 
     @Override
     public @NotNull <T> DataResultable<T> fail(T data, @NotNull String message) {
-        return fail(data, resolveMessage(message), null);
+        return fail(data, message, null);
     }
 
     @Override
@@ -59,7 +59,7 @@ final class DataResulterProviderImpl implements DataResulterProvider {
 
     @Override
     public <T> DataResultable<T> warning(@NotNull String message) {
-        return warning(null, resolveMessage(message));
+        return warning(null, message);
     }
 
     @Override
@@ -69,7 +69,7 @@ final class DataResulterProviderImpl implements DataResulterProvider {
 
     @Override
     public <T> DataResultable<T> warning(T data, @NotNull String message) {
-        return warning(data, resolveMessage(message));
+        return warning(data, message, null);
     }
 
     @Override

@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Simple testing for DataResultable.
  */
-public class DataResultableTest {
+class DataResultableTest {
 
     @Test
-    public void testOkWithData() {
+    void testOkWithData() {
         final var result = DataResultable.ok("test data");
 
         assertTrue(result.isOk());
@@ -32,7 +32,7 @@ public class DataResultableTest {
     }
 
     @Test
-    public void testOkWithDataAndMessage() {
+    void testOkWithDataAndMessage() {
         final var result = DataResultable.ok("test data", "test message");
 
         assertTrue(result.isOk());
@@ -49,7 +49,7 @@ public class DataResultableTest {
     }
 
     @Test
-    public void testFailWithMessage() {
+    void testFailWithMessage() {
         final var result = DataResultable.fail("test message");
 
         assertTrue(result.isFail());
@@ -61,11 +61,11 @@ public class DataResultableTest {
         assertNull(result.error());
         assertNotNull(result.message());
 
-        assertEquals(result.message(), "test message");
+        assertEquals("test message", result.message());
     }
 
     @Test
-    public void testFailWithThrowable() {
+    void testFailWithThrowable() {
         final var result = DataResultable.fail(new UnsupportedOperationException("This is not supposed to happen. :)"));
 
         assertTrue(result.isFail());
@@ -77,13 +77,13 @@ public class DataResultableTest {
         assertNotNull(result.error());
         assertNotNull(result.message());
 
-        assertEquals(result.message(), "This is not supposed to happen. :)");
+        assertEquals("This is not supposed to happen. :)", result.message());
 
         assertSame(Objects.requireNonNull(result.error()).getClass(), UnsupportedOperationException.class);
     }
 
     @Test
-    public void testFailWithDataAndMessage() {
+    void testFailWithDataAndMessage() {
         final var result = DataResultable.fail("test data", "test message");
 
         assertTrue(result.isFail());
@@ -95,12 +95,12 @@ public class DataResultableTest {
         assertNull(result.error());
         assertNotNull(result.message());
 
-        assertEquals(result.message(), "test message");
-        assertEquals(result.data(), "test data");
+        assertEquals("test message", result.message());
+        assertEquals("test data", result.data());
     }
 
     @Test
-    public void testFailWithDataAndMessageAndThrowable() {
+    void testFailWithDataAndMessageAndThrowable() {
         final var result = DataResultable.fail("test data", "test message", new UnsupportedOperationException("This is not supposed to happen. :)"));
 
         assertTrue(result.isFail());
@@ -112,14 +112,14 @@ public class DataResultableTest {
         assertNotNull(result.error());
         assertNotNull(result.message());
 
-        assertEquals(result.message(), "test message");
-        assertEquals(result.data(), "test data");
+        assertEquals("test message", result.message());
+        assertEquals("test data", result.data());
 
         assertSame(Objects.requireNonNull(result.error()).getClass(), UnsupportedOperationException.class);
     }
 
     @Test
-    public void testFailWithMessageAndThrowable() {
+    void testFailWithMessageAndThrowable() {
         final var result = DataResultable.fail("test message", new UnsupportedOperationException("This is not supposed to happen. :)"));
 
         assertTrue(result.isFail());
@@ -131,13 +131,13 @@ public class DataResultableTest {
         assertNotNull(result.error());
         assertNotNull(result.message());
 
-        assertEquals(result.message(), "test message");
+        assertEquals("test message", result.message());
 
         assertSame(Objects.requireNonNull(result.error()).getClass(), UnsupportedOperationException.class);
     }
 
     @Test
-    public void testWarningWithMessage() {
+    void testWarningWithMessage() {
         final var result = DataResultable.warning("test message");
 
         assertTrue(result.isWarning());
@@ -149,11 +149,11 @@ public class DataResultableTest {
         assertNull(result.error());
         assertNotNull(result.message());
 
-        assertEquals(result.message(), "test message");
+        assertEquals("test message", result.message());
     }
 
     @Test
-    public void testWarningWithThrowable() {
+    void testWarningWithThrowable() {
         final var result = DataResultable.warning(new UnsupportedOperationException("This is not supposed to happen. :)"));
 
         assertTrue(result.isWarning());
@@ -165,13 +165,13 @@ public class DataResultableTest {
         assertNotNull(result.error());
         assertNotNull(result.message());
 
-        assertEquals(result.message(), "This is not supposed to happen. :)");
+        assertEquals("This is not supposed to happen. :)", result.message());
 
         assertSame(Objects.requireNonNull(result.error()).getClass(), UnsupportedOperationException.class);
     }
 
     @Test
-    public void testWarningWithDataAndMessage() {
+    void testWarningWithDataAndMessage() {
         final var result = DataResultable.warning("test data", "test message");
 
         assertTrue(result.isWarning());
@@ -183,12 +183,12 @@ public class DataResultableTest {
         assertNull(result.error());
         assertNotNull(result.message());
 
-        assertEquals(result.message(), "test message");
-        assertEquals(result.data(), "test data");
+        assertEquals("test message", result.message());
+        assertEquals("test data", result.data());
     }
 
     @Test
-    public void testWarningWithDataAndMessageAndThrowable() {
+    void testWarningWithDataAndMessageAndThrowable() {
         final var result = DataResultable.warning("test data", "test message", new UnsupportedOperationException("This is not supposed to happen. :)"));
 
         assertTrue(result.isWarning());
@@ -200,14 +200,14 @@ public class DataResultableTest {
         assertNotNull(result.error());
         assertNotNull(result.message());
 
-        assertEquals(result.message(), "test message");
-        assertEquals(result.data(), "test data");
+        assertEquals("test message", result.message());
+        assertEquals("test data", result.data());
 
         assertSame(Objects.requireNonNull(result.error()).getClass(), UnsupportedOperationException.class);
     }
 
     @Test
-    public void testWarningWithMessageAndThrowable() {
+    void testWarningWithMessageAndThrowable() {
         final var result = DataResultable.warning("test message", new UnsupportedOperationException("This is not supposed to happen. :)"));
 
         assertTrue(result.isWarning());
@@ -219,13 +219,13 @@ public class DataResultableTest {
         assertNotNull(result.error());
         assertNotNull(result.message());
 
-        assertEquals(result.message(), "test message");
+        assertEquals("test message", result.message());
 
         assertSame(Objects.requireNonNull(result.error()).getClass(), UnsupportedOperationException.class);
     }
 
     @Test
-    public void testDataMono() {
+    void testDataMono() {
         final var testMono = Mono.just("Test");
 
         assertNotNull(testMono);
@@ -235,7 +235,7 @@ public class DataResultableTest {
     }
 
     @Test
-    public void testEmptyMono() {
+    void testEmptyMono() {
         final var testMono = Mono.empty();
 
         assertNotNull(testMono);

@@ -20,6 +20,7 @@ dependencies {
     compileOnly group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: JACKSON_VERSION
 
     testImplementation group: 'io.projectreactor', name: 'reactor-test', version: REACTOR_VERSION
+    testImplementation group: 'com.google.protobuf', name: 'protobuf-java', version: PROTOBUF_VERSION
 }
 
 protobuf {

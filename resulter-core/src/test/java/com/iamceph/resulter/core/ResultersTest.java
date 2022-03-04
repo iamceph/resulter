@@ -6,13 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-/**
- * @author Frantisek Novosad (fnovosad@monetplus.cz)
- */
-public class ResultersTest {
+class ResultersTest {
 
     @Test
-    public void testResulters() {
+    void testResulters() {
         assertNotNull(Resulters.resulter());
         assertNotNull(Resulters.dataResulter());
         assertNotNull(Resulters.convertor());
