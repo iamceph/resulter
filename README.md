@@ -1,7 +1,7 @@
 # Resulter
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.iamceph.resulter/resulter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.iamceph.resulter/resulter)
-[![javadoc](https://javadoc.io/badge2/com.iamceph.resulter/resulter/javadoc.svg)](https://javadoc.io/doc/com.iamceph.resulter/resulter)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.iamceph.resulter/resulter-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.iamceph.resulter/resulter-core)
+[![javadoc](https://javadoc.io/badge2/com.iamceph.resulter/resulter-core/javadoc.svg)](https://javadoc.io/doc/com.iamceph.resulter/resulter-core)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7bcf72e06caa4df8abab10b8ff2e2a87)](https://www.codacy.com/gh/iamceph/resulter/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=iamceph/resulter&amp;utm_campaign=Badge_Grade)
 
 Tired of throwing exceptions or returning nonsense? Well, Resulter will save you!
@@ -10,29 +10,35 @@ Tired of throwing exceptions or returning nonsense? Well, Resulter will save you
 
 Resulter provides simple to use Results. Why? Well, there are few benefits.
 
-- Fewer exceptions or returning nonsense messages.
-- Clear understanding of what went wrong with **message()** and **error()** methods.
-- gRPC implementation.
-- Project Reactor support.
+-   Fewer exceptions or returning nonsense messages.
+-   Clear understanding of what went wrong with **message()** and **error()** methods.
+-   gRPC implementation.
+-   Project Reactor support.
 
 ### Dependency
 
 The dependency for Resulter is available
 on [Maven Central](https://search.maven.org/artifact/com.iamceph.resulter/resulter).
 
-- Gradle
+-   Gradle
 
 ```groovy
-implementation 'com.iamceph.resulter:resulter-core:1.1.4'
+implementation 'com.iamceph.resulter:resulter-core:1.1.6'
 ```
 
-- Maven
+```kotlin
+implementation("com.iamceph.resulter", "resulter-core", "1.1.6")
+implementation("com.iamceph.resulter", "kotlin-extensions", "1.1.6")
+```
+
+-   Maven
 
 ```xml
+
 <dependency>
     <groupId>com.iamceph.resulter</groupId>
     <artifactId>resulter-core</artifactId>
-    <version>1.1.4</version>
+    <version>1.1.6</version>
 </dependency>
 ```
 

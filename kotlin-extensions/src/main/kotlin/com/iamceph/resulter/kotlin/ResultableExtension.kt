@@ -14,18 +14,27 @@ fun ProtoResultable.resultable(): Resultable = Resultable.convert(this)
  */
 fun Mono<ProtoResultable>.resultable(): Mono<Resultable> = map { it.resultable() }
 
+/**
+ * Does an action if the internal [Resultable] in the [Mono] is OK.
+ */
 fun Mono<Resultable>.ifOk(resultable: (Resultable) -> Unit): Mono<Resultable> = doOnNext {
     if (it.isOk) {
         resultable(it)
     }
 }
 
+/**
+ * Does an action if the internal [Resultable] in the [Mono] is FAIL.
+ */
 fun Mono<Resultable>.ifFail(resultable: (Resultable) -> Unit): Mono<Resultable> = doOnNext {
     if (it.isFail) {
         resultable(it)
     }
 }
 
+/**
+ * Resultable builder block.
+ */
 inline fun resultable(block: () -> Unit): Resultable = try {
     block()
     Resultable.ok()

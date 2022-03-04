@@ -1,19 +1,18 @@
 package com.iamceph.resulter.core.extension;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.jetbrains.annotations.NotNull;
+
 import com.iamceph.resulter.core.Resultable;
 import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.model.ProtoResultable;
 import com.iamceph.resulter.core.model.ProtoThrowable;
 import com.iamceph.resulter.core.model.Resulters;
 
-import lombok.val;
 import lombok.var;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Default implementation of ConvertorExtension.
