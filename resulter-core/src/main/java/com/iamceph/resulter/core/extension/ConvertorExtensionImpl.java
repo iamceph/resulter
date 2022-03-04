@@ -5,11 +5,14 @@ import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.model.ProtoResultable;
 import com.iamceph.resulter.core.model.ProtoThrowable;
 import com.iamceph.resulter.core.model.Resulters;
+
 import lombok.var;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Default implementation of ConvertorExtension.
@@ -32,14 +35,14 @@ public class ConvertorExtensionImpl implements ConvertorExtension {
      * @return OK resultable if everything is OK, otherwise FAIL.
      */
     @Override
-    public Resultable convert(Object input) {
+    public @NotNull Resultable convert(Object input) {
         if (input instanceof ProtoResultable) {
             final var casted = (ProtoResultable) input;
             final var message = casted.getMessage();
             final var status = ResultStatus.fromNumber(casted.getStatus().getNumber());
             final var error = casted.getError();
 
-            if (!error.equals(ProtoThrowable.getDefaultInstance())) {
+            if (!error.equals(error.getDefaultInstanceForType())) {
                 final var buildError = new Throwable(error.getErrorMessage());
                 buildError.setStackTrace(
                         toStackTrace(error.getStackTraceList())
@@ -69,20 +72,20 @@ public class ConvertorExtensionImpl implements ConvertorExtension {
     @Override
     public <T> T convert(Resultable resultable, Class<T> target) {
         if (target.isAssignableFrom(ProtoResultable.class)) {
-            final var message = ProtoResultable.newBuilder();
+            final var builder = ProtoResultable.newBuilder();
             final var error = resultable.error();
 
             if (error != null) {
-                message.setError(ProtoThrowable.newBuilder()
+                builder.setError(ProtoThrowable.newBuilder()
                                 .setErrorMessage(error.getMessage())
                                 .addAllStackTrace(fromStackTrace(Arrays.asList(error.getStackTrace())))
                                 .build())
                         .build();
             }
 
-            message.setMessage(resultable.message());
-            message.setStatus(ProtoResultable.Status.forNumber(resultable.status().getNumberValue()));
-            return (T) message.build();
+            builder.setMessage(resultable.message());
+            builder.setStatus(ProtoResultable.Status.forNumber(resultable.status().getNumberValue()));
+            return (T) builder.build();
         }
 
         if (target.isAssignableFrom(String.class)) {

@@ -1,5 +1,7 @@
 package com.iamceph.resulter.core.api.provider;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.Resultable;
 
@@ -10,50 +12,60 @@ public interface ResulterProvider {
     /**
      * @see Resultable#ok()
      */
+    @NotNull
     Resultable ok();
 
     /**
-     * @see Resultable#ok(String) 
+     * @see Resultable#ok(String)
      */
-    Resultable ok(String message);
+    @NotNull
+    Resultable ok(@NotNull String message);
 
     /**
-     * @see Resultable#fail(String) 
+     * @see Resultable#fail(String)
      */
-    Resultable fail(String message);
+    @NotNull
+    Resultable fail(@NotNull String message);
 
     /**
-     * @see Resultable#fail(String, Throwable) 
+     * @see Resultable#fail(String, Throwable)
      */
-    Resultable fail(String message, Throwable throwable);
+    @NotNull
+    Resultable fail(@NotNull String message, Throwable throwable);
 
     /**
-     * @see Resultable#fail(Throwable) 
+     * @see Resultable#fail(Throwable)
      */
+    @NotNull
     Resultable fail(Throwable throwable);
 
     /**
-     * @see Resultable#warning(String) 
+     * @see Resultable#warning(String)
      */
-    Resultable warning(String message);
+    @NotNull
+    Resultable warning(@NotNull String message);
 
     /**
-     * @see Resultable#warning(String, Throwable) 
+     * @see Resultable#warning(String, Throwable)
      */
-    Resultable warning(String message, Throwable throwable);
+    @NotNull
+    Resultable warning(@NotNull String message, Throwable throwable);
 
     /**
      * @see Resultable#warning(Throwable)
      */
+    @NotNull
     Resultable warning(Throwable throwable);
 
     /**
      * @see Resultable#from(ResultStatus, String, Throwable)
      */
-    Resultable from(ResultStatus status, String message, Throwable throwable);
+    @NotNull
+    Resultable from(@NotNull ResultStatus status, @NotNull String message, Throwable throwable);
 
     /**
      * @see Resultable
      */
+    @NotNull
     Resultable convert(Object input);
 }
