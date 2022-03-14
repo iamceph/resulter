@@ -1,4 +1,4 @@
-name: build
+name: Build Snapshot
 on: [ push, pull_request ]
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
           key: ${{ runner.os }}-${{ github.job }}-${{ matrix.java }}-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
       - name: Run tests
-        run: ./gradlew assemble test
+        run: ./gradlew snapshot assemble test
       - name: Publish Snapshot
         if: >
           matrix.java == env.MIN_JVM
