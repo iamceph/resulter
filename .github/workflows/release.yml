@@ -28,4 +28,4 @@ jobs:
           ORG_GRADLE_PROJECT_signingKeyId: 241134EA
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-        run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository -Prelease
+        run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository final -Prelease.useLastTag=true -Prelease
