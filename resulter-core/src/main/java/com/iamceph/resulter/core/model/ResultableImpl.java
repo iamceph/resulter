@@ -59,4 +59,9 @@ class ResultableImpl implements Resultable {
             }
         };
     }
+
+    @Override
+    public ProtoResultable asProto() {
+        return convertor().asProto();
+    }
 }

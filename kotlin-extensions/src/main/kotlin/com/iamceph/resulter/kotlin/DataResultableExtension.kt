@@ -2,10 +2,16 @@ package com.iamceph.resulter.kotlin
 
 import com.google.protobuf.Message
 import com.iamceph.resulter.core.DataResultable
+import com.iamceph.resulter.core.Resultable
 import com.iamceph.resulter.core.model.ResultableData
 import com.iamceph.resulter.core.pack.Packeto
 import reactor.core.publisher.Mono
 import kotlin.reflect.KClass
+
+/**
+ * Shortcut for Packing the [Message] into [ResultableData].
+ */
+fun Message.pack(): ResultableData = Packeto.pack(this)
 
 /**
  * Shortcut for Packing the [DataResultable] into [ResultableData].

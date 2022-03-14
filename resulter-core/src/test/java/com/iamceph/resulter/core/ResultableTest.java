@@ -188,7 +188,7 @@ class ResultableTest {
 
         assertSame(Objects.requireNonNull(result.error()).getClass(), NullPointerException.class);
 
-        val convert = result.convertor().grpc();
+        val convert = result.asProto();
 
         assertNotNull(convert, "Converted is not present!");
         assertEquals("", convert.getMessage());

@@ -128,4 +128,9 @@ final class GroupedResulImpl implements GroupedResultable {
 
         return builder.toString();
     }
+
+    @Override
+    public ProtoResultable asProto() {
+        return convertor().asProto();
+    }
 }

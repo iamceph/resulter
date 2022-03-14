@@ -3,6 +3,7 @@ package com.iamceph.resulter.core;
 import com.iamceph.resulter.core.api.ResultStatus;
 import com.iamceph.resulter.core.model.ProtoResultable;
 import com.iamceph.resulter.core.model.Resulters;
+import com.iamceph.resulter.core.pack.ProtoWrapper;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +15,7 @@ import java.util.function.Supplier;
 /**
  * The Resultable API.
  */
-public interface Resultable extends Serializable, Cloneable {
+public interface Resultable extends Serializable, Cloneable, ProtoWrapper<ProtoResultable> {
 
     /**
      * Creates new {@link Resultable} that has state {@link ResultStatus#OK} with no message.
@@ -155,7 +156,7 @@ public interface Resultable extends Serializable, Cloneable {
      * @return Transformed DataResultable.
      */
     default <T> DataResultable<T> transform(@Nullable T data) {
-        if (data == null && isOk()) {
+        if (data == null) {
             return DataResultable.fail("No data provided.");
         }
 
@@ -195,7 +196,6 @@ public interface Resultable extends Serializable, Cloneable {
      *
      * @return {@link Resultable#message()}
      */
-    @ApiStatus.Internal
     default String getMessage() {
         return message();
     }
@@ -265,8 +265,20 @@ public interface Resultable extends Serializable, Cloneable {
          * Converts this Resultable info gRPC generated {@link ProtoResultable}.
          *
          * @return {@link ProtoResultable} for gRPC.
+         * @deprecated Incorrect method, this is not only for gRPC. Use {@link #asProto()} instead.
          */
+        @ApiStatus.ScheduledForRemoval(inVersion = "1.2.0")
+        @Deprecated
         default ProtoResultable grpc() {
+            return convert(ProtoResultable.class);
+        }
+
+        /**
+         * Converts this Resultable into a Protobuf generated {@link ProtoResultable}.
+         *
+         * @return {@link ProtoResultable} protobuf version of Resultable..
+         */
+        default ProtoResultable asProto() {
             return convert(ProtoResultable.class);
         }
     }
