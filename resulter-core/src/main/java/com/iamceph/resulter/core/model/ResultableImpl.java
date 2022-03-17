@@ -9,7 +9,6 @@ import lombok.experimental.Accessors;
  * Default implementation of the {@link Resultable}
  */
 @EqualsAndHashCode
-@ToString
 @Getter
 @Accessors(fluent = true)
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
@@ -63,5 +62,14 @@ class ResultableImpl implements Resultable {
     @Override
     public ProtoResultable asProto() {
         return convertor().asProto();
+    }
+
+    @Override
+    public String toString() {
+        return "Resultable {" +
+                "status=" + status +
+                ", message='" + (message != null ? message : "empty") + '\'' +
+                ", error=" + (error != null ? error.getMessage() : "empty") +
+                '}';
     }
 }

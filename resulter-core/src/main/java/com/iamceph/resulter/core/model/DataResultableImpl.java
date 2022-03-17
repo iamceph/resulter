@@ -4,7 +4,6 @@ import com.iamceph.resulter.core.DataResultable;
 import com.iamceph.resulter.core.api.ResultStatus;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
@@ -15,7 +14,6 @@ import lombok.experimental.Accessors;
  */
 @EqualsAndHashCode(callSuper = false)
 @Getter
-@ToString(callSuper = true)
 @Accessors(fluent = true)
 final class DataResultableImpl<T> extends ResultableImpl implements DataResultable<T> {
     private final T data;
@@ -55,5 +53,15 @@ final class DataResultableImpl<T> extends ResultableImpl implements DataResultab
     @Override
     public boolean isWarning() {
         return status == ResultStatus.WARNING;
+    }
+
+    @Override
+    public String toString() { return "DataResultable {" +
+            "data=" + (data != null ? data : "empty") +
+            ", status=" + status +
+            ", message='" + (message != null ? message : "empty") + '\'' +
+            ", error=" + (error != null ? error.getMessage() : "empty") +
+            '}';
+
     }
 }

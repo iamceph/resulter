@@ -66,7 +66,6 @@ final class GroupedResulImpl implements GroupedResultable {
     public List<String> messages() {
         return resultables.stream()
                 .map(Resultable::message)
-                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 
@@ -132,5 +131,14 @@ final class GroupedResulImpl implements GroupedResultable {
     @Override
     public ProtoResultable asProto() {
         return convertor().asProto();
+    }
+
+    @Override
+    public String toString() {
+        return "GroupedResultable {" +
+                "status=" + status() +
+                ", message='" + (message().isEmpty() ? message() : "empty") + '\'' +
+                ", error=" + (error() != null ? error() : "empty") +
+                '}';
     }
 }
