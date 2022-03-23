@@ -1,13 +1,11 @@
 package com.iamceph.resulter.core.pack;
 
-import com.google.protobuf.Message;
-
 /**
  * A wrapper for .proto conversions.
  *
- * @param <T> .proto type of this class
+ * @param <T> result of the asProto
  */
-public interface ProtoWrapper<T extends Message> {
+public interface ProtoWrapper<T> {
     /**
      * Wraps current wrapper into a .proto class
      *

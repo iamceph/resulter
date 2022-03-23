@@ -6,9 +6,11 @@ import com.google.protobuf.Message;
 import com.iamceph.resulter.core.DataResultable;
 import com.iamceph.resulter.core.Resultable;
 import com.iamceph.resulter.core.model.ResultableData;
+
 import lombok.experimental.UtilityClass;
 import lombok.val;
 import lombok.var;
+
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -50,8 +52,14 @@ public class Packeto {
         if (data instanceof ProtoWrapper) {
             final var wrapped = (ProtoWrapper<?>) data;
             final var message = wrapped.asProto();
+            if (!(message instanceof ProtoWrapper)) {
+                val errorResult = DataResultable.fail("Cannot convert data - " + data.getClass().getSimpleName());
+                return ResultableData.newBuilder()
+                        .setResult(errorResult.asProto())
+                        .build();
+            }
 
-            return buildMessage(input, message);
+            return buildMessage(input, (Message) message);
         }
 
         val errorResult = DataResultable.fail("Cannot convert data - " + data.getClass().getSimpleName());
